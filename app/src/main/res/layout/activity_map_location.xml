@@ -1,0 +1,77 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#f6f6f6"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
+        <EditText
+            android:id="@+id/poi_search_view"
+            android:layout_width="215dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:hint="@string/poi_search_hint"
+            android:textColorHint="#939393"
+            android:textSize="14sp"
+            android:background="@drawable/icon_map_search_box_bg"
+            android:drawableLeft="@drawable/icon_map_search_box_left_icon"
+            android:drawablePadding="3dp"
+            android:paddingLeft="5dp">
+        </EditText>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/map_panel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <com.baidu.mapapi.map.MapView
+                    android:id="@+id/bmap_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true" />
+
+                <Button
+                    android:id="@+id/locate_current_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginBottom="15dip"
+                    android:background="@drawable/icon_map_locate_current"/>
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/address_listview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_with_top_bottom">
+            </ListView>
+        </LinearLayout>
+
+
+        <ListView
+            android:id="@+id/poi_search_results"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+        </ListView>
+    </RelativeLayout>
+</LinearLayout>
