@@ -5,10 +5,11 @@
     android:background="@color/yellow"
     tools:context="com.pay.chip.easypay.pages.merchant.fragment.MerchantFragment">
 
-    <com.baidu.mapapi.map.MapView
-        android:id="@+id/bmapView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:clickable="true" />
 
+    <Button
+        android:id="@+id/find"
+        android:text="获取位置"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 </FrameLayout>
