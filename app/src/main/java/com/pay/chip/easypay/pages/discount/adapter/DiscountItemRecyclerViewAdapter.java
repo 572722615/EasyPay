@@ -62,6 +62,8 @@ public class DiscountItemRecyclerViewAdapter extends RecyclerView.Adapter<Recycl
         }else{
             staggerViewHolder.iconView.setImageResource(R.drawable.ic_launcher);
         }
+        staggerViewHolder.card_layout.setRadius(10);
+
         Bitmap bitmap = ((BitmapDrawable)  staggerViewHolder.iconView.getDrawable()).getBitmap();
         if(bitmap!=null){
             Palette.generateAsync(bitmap,

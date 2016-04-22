@@ -22,4 +22,17 @@
     <string name="share_us">分享我们</string>
     <string name="click_login">用户登录</string>
     <string name="new_discount">最新的优惠券</string>
+    <string name="current_version_num">当前版本:1.0.0</string>
+    <string name="about_us_text">关于我们的内容</string>
+    <string name="company">copy@2016</string>
+    <string name="option_back">写下你的用户反馈</string>
+    <string name="cotact_text">联系方式</string>
+    <string name="contact_example">你的手机号或者QQ</string>
+    <string name="send">发送</string>
+    <string name="question_1">问题1</string>
+    <string name="question_2">问题2</string>
+    <string name="answer_1">答案1</string>
+    <string name="answer_2">答案2</string>
+    <string name="question_3">问题3</string>
+    <string name="answer_3">答案3</string>
 </resources>

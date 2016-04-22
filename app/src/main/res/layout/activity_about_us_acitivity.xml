@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/about_head"
+        layout="@layout/top_title" />
+
+    <LinearLayout
+        android:id="@+id/about_head_layout"
+        android:layout_below="@id/about_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_bg"
+        android:paddingBottom="12dp"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/grey_line" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="35dp"
+            android:src="@drawable/about_logo" />
+
+        <TextView
+            android:id="@+id/current_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="@string/current_version_num"
+            android:textColor="@color/version_grey"
+            android:textSize="13sp" />
+
+
+
+    </LinearLayout>
+    <ScrollView
+        android:layout_below="@id/about_head_layout"
+        android:layout_above="@+id/about_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/about_us_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="28dp"
+                android:lineSpacingExtra="11dp"
+                android:paddingLeft="22dp"
+                android:paddingRight="22dp"
+                android:text="@string/about_us_text"
+                android:textColor="@color/user_font_grey"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:id="@+id/about_bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="30dp">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/wifi_protocol"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="28dp"
+            android:textSize="14sp"
+            android:text="@string/company"
+            android:textColor="@color/company_grey" />
+    </RelativeLayout>
+
+</RelativeLayout>
