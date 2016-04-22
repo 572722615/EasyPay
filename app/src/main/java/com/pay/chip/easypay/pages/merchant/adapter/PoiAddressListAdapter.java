@@ -26,7 +26,7 @@ public class PoiAddressListAdapter extends ArrayAdapter<PoiItemModel> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, final View convertView, ViewGroup parent){
         RelativeLayout cellView;
 
         if (convertView == null) {
@@ -50,8 +50,6 @@ public class PoiAddressListAdapter extends ArrayAdapter<PoiItemModel> {
         } else {
             selectedIconView.setVisibility(View.GONE);
         }
-
-
         return cellView;
     }
 }

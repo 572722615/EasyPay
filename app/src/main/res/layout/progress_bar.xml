@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <FrameLayout
+        android:id="@+id/cm_progress_bar_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/progress_bg"></FrameLayout>
+
+    <ImageView
+        android:id="@+id/progress_bar_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignBottom="@id/cm_progress_bar_layout"
+        android:layout_alignLeft="@id/cm_progress_bar_layout"
+        android:layout_alignTop="@id/cm_progress_bar_layout"
+        android:background="@drawable/progress_green"
+        android:minWidth="8dp" />
+
+    <ImageView
+        android:id="@+id/progress_bar_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignBottom="@id/cm_progress_bar_layout"
+        android:layout_alignLeft="@id/cm_progress_bar_layout"
+        android:layout_alignTop="@id/cm_progress_bar_layout"
+        android:background="@drawable/progress_white"
+        android:minWidth="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/progress_bar_1"
+        android:layout_alignRight="@id/progress_bar_1"
+        android:text="Tt" />
+
+</RelativeLayout>

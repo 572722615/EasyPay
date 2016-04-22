@@ -9,32 +9,43 @@
         android:background="#f6f6f6"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true">
+
         <EditText
             android:id="@+id/poi_search_view"
             android:layout_width="215dp"
             android:layout_height="30dp"
             android:layout_centerInParent="true"
-            android:imeOptions="actionSearch"
-            android:singleLine="true"
-            android:hint="@string/poi_search_hint"
-            android:textColorHint="#939393"
-            android:textSize="14sp"
             android:background="@drawable/icon_map_search_box_bg"
             android:drawableLeft="@drawable/icon_map_search_box_left_icon"
             android:drawablePadding="3dp"
-            android:paddingLeft="5dp">
-        </EditText>
+            android:hint="@string/poi_search_hint"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:textColorHint="#939393"
+            android:textSize="14sp"></EditText>
+
+        <Button
+            android:id="@+id/discountSure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="确定" />
     </RelativeLayout>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:id="@+id/map_panel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -50,11 +61,11 @@
                     android:id="@+id/locate_current_btn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginRight="13dp"
+                    android:layout_alignParentRight="true"
                     android:layout_marginBottom="15dip"
-                    android:background="@drawable/icon_map_locate_current"/>
+                    android:layout_marginRight="13dp"
+                    android:background="@drawable/icon_map_locate_current" />
             </RelativeLayout>
 
             <ListView
@@ -62,8 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/border_with_top_bottom">
-            </ListView>
+                android:background="@drawable/border_with_top_bottom"></ListView>
         </LinearLayout>
 
 
@@ -71,7 +81,6 @@
             android:id="@+id/poi_search_results"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
-        </ListView>
+            android:visibility="gone"></ListView>
     </RelativeLayout>
 </LinearLayout>

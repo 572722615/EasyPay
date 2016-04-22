@@ -25,7 +25,7 @@
     <!-- SD卡读取权限，用户写入离线定位数据 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -59,7 +59,9 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="onsbntf3GyeKuFToRhL7k8HT9YRotZIV" />
 
-        <activity android:name=".pages.merchant.activity.MapLocationActivity" >
+        <activity android:name=".pages.merchant.activity.MapLocationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
     </application>
 

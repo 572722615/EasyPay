@@ -1,15 +1,50 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/yellow"
     tools:context="com.pay.chip.easypay.pages.merchant.fragment.MerchantFragment">
 
 
-    <Button
-        android:id="@+id/find"
-        android:text="获取位置"
-        android:gravity="center"
+    <RelativeLayout
+        android:id="@+id/title_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
-</FrameLayout>
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/near_merchant"
+            android:textColor="@color/company_grey" />
+
+        <Button
+            android:id="@+id/find"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:text="@string/find_location" />
+
+    </RelativeLayout>
+
+    <com.pay.chip.easypay.util.EBPullToRefreshListView
+        android:id="@+id/pullToRefreshLV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_layout"
+        android:background="#ececec"
+        android:divider="@null"
+        android:fadingEdge="none">
+
+    </com.pay.chip.easypay.util.EBPullToRefreshListView>
+
+    <com.pay.chip.easypay.util.EBEmptyView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_layout"
+        android:orientation="horizontal"
+        android:visibility="gone" />
+
+
+</RelativeLayout>

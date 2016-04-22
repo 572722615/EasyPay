@@ -62,6 +62,7 @@ public class MapLocationActivity extends AppCompatActivity implements View.OnCli
     private LinearLayout mMapPanel;
     private MapView mBMapView;
     private Button locateCurrentBtn;
+    private Button discountSure;
     private ListView mAddressListView;
     private ListView mPoiSearchResultsView;
 
@@ -116,6 +117,8 @@ public class MapLocationActivity extends AppCompatActivity implements View.OnCli
         locateCurrentBtn.setOnClickListener(this);
         mAddressListView = (ListView) findViewById(R.id.address_listview);
         mPoiSearchResultsView = (ListView) findViewById(R.id.poi_search_results);
+        discountSure = (Button) findViewById(R.id.discountSure);
+        discountSure.setOnClickListener(this);
     }
 
 
@@ -360,6 +363,9 @@ public class MapLocationActivity extends AppCompatActivity implements View.OnCli
                 if (mSelfLocation != null) {
                     setSelectedPostion(mSelfLocation.getLatitude(), mSelfLocation.getLongitude(), true, true);
                 }
+                break;
+            case R.id.discountSure:
+                finish();
                 break;
         }
     }
