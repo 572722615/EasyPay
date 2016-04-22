@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.pay.chip.easypay.R;
 import com.pay.chip.easypay.pages.person.activity.AboutUsAcitivity;
+import com.pay.chip.easypay.pages.person.activity.NewsActivity;
+import com.pay.chip.easypay.pages.person.activity.ShareActivity;
 import com.pay.chip.easypay.pages.person.activity.UserFeedBackActivity;
 import com.pay.chip.easypay.pages.person.activity.UserHelpActivity;
 import com.pay.chip.easypay.util.AsyncCircleImageView;
@@ -121,6 +123,12 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
         switch (id){
             case R.id.user_about:
                 startActivity(new Intent(getActivity(), AboutUsAcitivity.class));
+                break;
+            case R.id.user_new:
+                startActivity(new Intent(getActivity(), NewsActivity.class));
+                break;
+            case R.id.my_share:
+                startActivity(new Intent(getActivity(), ShareActivity.class));
                 break;
             case R.id.user_help:
                 startActivity(new Intent(getActivity(), UserHelpActivity.class));

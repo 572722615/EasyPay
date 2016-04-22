@@ -35,4 +35,7 @@
     <string name="answer_2">答案2</string>
     <string name="question_3">问题3</string>
     <string name="answer_3">答案3</string>
+    <string name="invite_msg">分享好友</string>
+    <string name="invite_now">立即邀请</string>
+    <string name="no_msg">暂无消息</string>
 </resources>
