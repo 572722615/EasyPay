@@ -8,4 +8,26 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="user_new_style">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">12dp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/company_grey_text</item>
+        <item name="android:drawablePadding">16dp</item>
+    </style>
+
+    <style name="user_new_arr_style">
+        <item name="android:background">@drawable/user_info_arr_selector</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">22dp</item>
+    </style>
+
+    <declare-styleable name="AsyncCircleImageView">
+        <attr name="have_background_ring" format="boolean"></attr>
+        <attr name="background_ring_color" format="color"></attr>
+        <attr name="background_ring_thickness" format="dimension"></attr>
+    </declare-styleable>
 </resources>

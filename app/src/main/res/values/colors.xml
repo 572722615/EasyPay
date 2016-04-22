@@ -11,6 +11,10 @@
     <color name="grey_text">#343434</color>
     <color name="eb_empty_bg">#353535</color>
     <color name="global_bg">#eeeff3</color>
+    <color name="grey_bg">#F3F3F3</color>
+    <color name="company_grey_text">#343434</color>
+    <color name="grey_line">#DEDFE0</color>
+    <color name="user_font_grey">#686868</color>
     <drawable name="default_bmp">#19000000</drawable>
     <drawable name="transparent_drawable">#00000000</drawable>
 </resources>

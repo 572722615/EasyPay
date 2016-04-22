@@ -3,7 +3,6 @@ package com.pay.chip.easypay.pages.discount.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,11 +69,12 @@ public class DiscountFragment extends Fragment {
                 myItemRecyclerViewAdapter.notifyDataSetChanged();
             }
         });
-        if (1 >= mColumnCount) {
+      /*  if (1 >= mColumnCount) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         } else {
             recyclerView.setLayoutManager(new StaggeredGridLayoutManager(mColumnCount, StaggeredGridLayoutManager.VERTICAL));
-        }
+        }*/
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         myItemRecyclerViewAdapter = new DiscountItemRecyclerViewAdapter(DummyContent.generyData(page));
         recyclerView.setAdapter(myItemRecyclerViewAdapter);
         recyclerView.setAutoLoadMoreEnable(true);

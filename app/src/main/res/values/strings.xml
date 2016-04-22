@@ -12,4 +12,14 @@
     <string name="no_net_content">没有内容</string>
     <string name="empty_title_no_network">没有网络</string>
     <string name="loading">加载中…</string>
+    <string name="personal_center">个人中心</string>
+    <string name="my_new">我的消息</string>
+    <string name="my_share">我的分享</string>
+    <string name="options">意见反馈</string>
+    <string name="user_help">用户帮助</string>
+    <string name="version_update">版本升级</string>
+    <string name="about_us">关于我们</string>
+    <string name="share_us">分享我们</string>
+    <string name="click_login">用户登录</string>
+    <string name="new_discount">最新的优惠券</string>
 </resources>

@@ -1,9 +1,14 @@
 package com.pay.chip.easypay.pages.discount.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.v7.graphics.Palette;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pay.chip.easypay.R;
@@ -48,16 +53,39 @@ public class DiscountItemRecyclerViewAdapter extends RecyclerView.Adapter<Recycl
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (mIsStagger) {
-            StaggerViewHolder staggerViewHolder = (StaggerViewHolder) holder;
+//        if (mIsStagger) {
+            final StaggerViewHolder staggerViewHolder = (StaggerViewHolder) holder;
             staggerViewHolder.iconView.setVisibility(View.VISIBLE);
             staggerViewHolder.mContentView.setText(mValues.get(position).details);
-        } else {
+        if(position%2==0){
+            staggerViewHolder.iconView.setImageResource(R.drawable.about_logo);
+        }else{
+            staggerViewHolder.iconView.setImageResource(R.drawable.ic_launcher);
+        }
+        Bitmap bitmap = ((BitmapDrawable)  staggerViewHolder.iconView.getDrawable()).getBitmap();
+        if(bitmap!=null){
+            Palette.generateAsync(bitmap,
+                    new Palette.PaletteAsyncListener() {
+                        @Override
+                        public void onGenerated(Palette palette) {
+                            Palette.Swatch vibrant =
+                                    palette.getVibrantSwatch();
+                            // If we have a vibrant color
+                            // update the title TextView
+                            staggerViewHolder.card_layout.setCardBackgroundColor(
+                                    vibrant.getRgb());
+                            staggerViewHolder.mContentView.setTextColor(
+                                    vibrant.getTitleTextColor());
+                        }
+                    });
+        }
+
+       /* } else {
             ViewHolder mHolder = (ViewHolder) holder;
             mHolder.mItem = mValues.get(position);
             mHolder.mContentView.setText(mValues.get(position).content);
             mHolder.mIdView.setText(mValues.get(position).id);
-        }
+        }*/
     }
 
     @Override
@@ -67,14 +95,16 @@ public class DiscountItemRecyclerViewAdapter extends RecyclerView.Adapter<Recycl
 
     public class StaggerViewHolder extends RecyclerView.ViewHolder {
         public View mView;
-        public View iconView;
+        public ImageView iconView;
         public TextView mContentView;
+        public CardView card_layout;
 
         public StaggerViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
-            iconView = itemView.findViewById(R.id.icon);
+            iconView = (ImageView) itemView.findViewById(R.id.icon);
             mContentView = (TextView) itemView.findViewById(R.id.content);
+            card_layout = (CardView) itemView.findViewById(R.id.card_layout);
         }
     }
 
