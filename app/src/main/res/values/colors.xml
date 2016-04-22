@@ -10,6 +10,7 @@
     <color name="transparent_gray">#00000000</color>
     <color name="grey_text">#343434</color>
     <color name="eb_empty_bg">#353535</color>
+    <color name="global_bg">#eeeff3</color>
     <drawable name="default_bmp">#19000000</drawable>
     <drawable name="transparent_drawable">#00000000</drawable>
 </resources>
