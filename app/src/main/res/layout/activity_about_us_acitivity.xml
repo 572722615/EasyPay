@@ -82,7 +82,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/wifi_protocol"
             android:layout_centerHorizontal="true"
             android:paddingBottom="28dp"
             android:textSize="14sp"
