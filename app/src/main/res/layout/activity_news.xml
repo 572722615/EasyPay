@@ -7,11 +7,15 @@
     android:background="@color/grey_bg"
     tools:context="com.pay.chip.easypay.pages.person.activity.NewsActivity">
 
+    <include
+        android:id="@+id/about_head"
+        layout="@layout/top_title" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="120dp"
         android:src="@drawable/no_order" />
 
     <TextView
