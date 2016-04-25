@@ -6,6 +6,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.pay.chip.easypay.pages.person.event.UserLoginEvent;
+import com.pay.chip.easypay.pages.person.event.UserRegisterEvent;
 import com.pay.chip.easypay.pages.person.model.BaseResult;
 
 import java.util.HashMap;
@@ -30,7 +31,7 @@ public class HttpProcessManager {
     }
 
 
-    public StringRequest loginStudent(String url, final String student_name, final String student_pass) {
+    public StringRequest loginStudent(String url, final String user_telno, final String user_pass) {
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
 
@@ -39,7 +40,6 @@ public class HttpProcessManager {
                         String res = stripSAE(arg0);
                         BaseResult result = BaseResult.getFromJson(res);
                         UserLoginEvent baseEvent = new UserLoginEvent(result.getCode(), result.getInfo());
-                        CustomToast.showToast(result.toString());
                         EventBus.getDefault().post(baseEvent);
                         return;
                     }
@@ -59,8 +59,45 @@ public class HttpProcessManager {
             protected Map<String, String> getParams() throws AuthFailureError {
                 //传递参数
                 Map<String, String> map = new HashMap<String, String>();
-                map.put(Constant.ID, student_name);
-                map.put(Constant.PASS, student_pass);
+                map.put(Constant.TELNO, user_telno);
+                map.put(Constant.PASS, user_pass);
+                return map;
+            }
+
+        };
+        return request;
+    }
+
+    public StringRequest registerStudent(String url, final String user_telno, final String user_pass) {
+        StringRequest request = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String arg0) {
+                        String res = stripSAE(arg0);
+                        BaseResult result = BaseResult.getFromJson(res);
+                        UserRegisterEvent baseEvent = new UserRegisterEvent(result.getCode(), result.getInfo());
+                        EventBus.getDefault().post(baseEvent);
+                        return;
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError arg0) {
+
+
+                EventBus.getDefault().post(new UserRegisterEvent(Constant.CODE_FAIL, null));
+                return;
+            }
+
+
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //传递参数
+                Map<String, String> map = new HashMap<String, String>();
+                map.put(Constant.TELNO, user_telno);
+                map.put(Constant.PASS, user_pass);
                 return map;
             }
 

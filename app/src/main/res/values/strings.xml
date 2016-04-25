@@ -43,4 +43,5 @@
     <string name="login_account">用户注册</string>
     <string name="register">注册</string>
     <string name="net_fail">网络连接失败</string>
+    <string name="not_phone">不是有效的手机号</string>
 </resources>

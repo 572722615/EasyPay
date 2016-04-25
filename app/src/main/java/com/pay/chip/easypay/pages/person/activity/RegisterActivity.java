@@ -8,9 +8,18 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.StringRequest;
 import com.pay.chip.easypay.R;
+import com.pay.chip.easypay.pages.person.event.UserRegisterEvent;
+import com.pay.chip.easypay.util.Constant;
+import com.pay.chip.easypay.util.CustomToast;
+import com.pay.chip.easypay.util.HttpProcessManager;
 import com.pay.chip.easypay.util.PassEditText;
 import com.pay.chip.easypay.util.PhoneEditText;
+import com.pay.chip.easypay.util.UserUtils;
+import com.pay.chip.easypay.util.VolleyManager;
+
+import de.greenrobot.event.EventBus;
 
 public class RegisterActivity extends Activity implements View.OnClickListener {
 
@@ -45,6 +54,13 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initView();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     private void userRegister() {
@@ -54,6 +70,14 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         if(TextUtils.isEmpty(phone)||TextUtils.isEmpty(pass)){
             return;
         }
+
+        if(!UserUtils.isMobileNUM(phone)){
+            CustomToast.showToast(getString(R.string.not_phone));
+            return;
+        }
+
+        StringRequest request = HttpProcessManager.getInstance().registerStudent(Constant.HOST_USER_REGISTER,phone,pass);
+        VolleyManager.getInstance(getApplicationContext()).addToRequestQueue(request);
 
 
 
@@ -78,6 +102,31 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
 
 
         }
+    }
+
+
+    public void onEventMainThread(UserRegisterEvent event) {
+
+
+        int code = event.code;
+        if (event.info == null) {
+            return;
+        }
+
+        if (code == Constant.CODE_FAIL) {
+            CustomToast.showToast(getString(R.string.net_fail));
+
+            return;
+        } else {
+            if (code == Constant.CODE_SUCCESS) {
+              /*  String data = StudentInfoData.DataBean.toJsonString(event.infoData);
+                LoginDataHelper.getInstance().setLoginUserInfo(data);
+                fillText(event.infoData);*/
+            }
+            CustomToast.showLongToast(event.info.toString());
+
+        }
+
     }
 
 

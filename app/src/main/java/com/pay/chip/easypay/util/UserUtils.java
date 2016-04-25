@@ -3,6 +3,9 @@ package com.pay.chip.easypay.util;
 import android.text.TextUtils;
 import android.widget.Button;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class UserUtils {
     public static final int PASSWORD_MIN_LENGTH = 6;
@@ -11,6 +14,18 @@ public class UserUtils {
     //过滤sae实名制
     public static String stripSAE(String json) {
         return json.substring(0, json.indexOf("<"));
+    }
+
+    //是否是有效手机号
+    public static boolean isMobileNUM(String mobiles) {
+        Pattern p = Pattern.compile("^((13[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\\d{8}$");
+        if (mobiles != null) {
+            Matcher m = p.matcher(mobiles);
+            return m.matches();
+        } else {
+            return false;
+        }
+
     }
 
     /**

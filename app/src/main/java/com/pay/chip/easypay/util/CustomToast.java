@@ -26,7 +26,7 @@ public class CustomToast {
             mToast.setText(text);
         else
             mToast = Toast.makeText(PayApplication.getAppContext(), text, duration);
-//        mHandler.postDelayed(r, 1000);
+        mHandler.postDelayed(r, 1000);
 
         mToast.show();
     }
@@ -35,14 +35,14 @@ public class CustomToast {
         if (TextUtils.isEmpty(text)) {
             return;
         }
-        showToast(text, Toast.LENGTH_SHORT);
+        showToast(text, 3000);
     }
 
     public static void showLongToast(String text) {
         if (TextUtils.isEmpty(text)) {
             return;
         }
-        Toast.makeText(PayApplication.getAppContext(), text, Toast.LENGTH_LONG).show();
+        Toast.makeText(PayApplication.getInstance(),text,Toast.LENGTH_LONG).show();
     }
 
     public static void showToast(int id) {
@@ -50,4 +50,3 @@ public class CustomToast {
     }
 
 }
-

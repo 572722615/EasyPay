@@ -17,6 +17,7 @@ public class Constant {
 
     private static String USER_LOGIN = "User/login";
     private static String USER_REGISTER = "User/register";
+
     private static String STUDENT_FIND = "Student/find";
     private static String TEACHER_FIND = "Teacher/find";
     private static String WORK_CONTENT_UNFINISHED = "Work_content/findUnfinished";
@@ -36,6 +37,7 @@ public class Constant {
     public static final String CONTENT = "content";
     public static final String CONTENT_ANSWER = "answer_content";
     public static final String PASS = "pass";
+    public static final String TELNO = "telno";
 
     public static String HOST_USER_LOGIN = HOST + USER_LOGIN;
     public static String HOST_USER_REGISTER = HOST + USER_REGISTER;

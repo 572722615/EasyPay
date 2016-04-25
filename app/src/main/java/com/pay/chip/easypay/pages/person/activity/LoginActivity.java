@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.StringRequest;
 import com.pay.chip.easypay.R;
 import com.pay.chip.easypay.pages.person.event.UserLoginEvent;
 import com.pay.chip.easypay.util.Constant;
@@ -17,6 +18,8 @@ import com.pay.chip.easypay.util.CustomToast;
 import com.pay.chip.easypay.util.HttpProcessManager;
 import com.pay.chip.easypay.util.PassEditText;
 import com.pay.chip.easypay.util.PhoneEditText;
+import com.pay.chip.easypay.util.UserUtils;
+import com.pay.chip.easypay.util.VolleyManager;
 
 import de.greenrobot.event.EventBus;
 
@@ -67,7 +70,14 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         if(TextUtils.isEmpty(telno)||TextUtils.isEmpty(pass)){
             return;
         }
-        HttpProcessManager.getInstance().loginStudent(Constant.HOST_USER_LOGIN, telno, pass);
+
+        if(!UserUtils.isMobileNUM(telno)){
+            CustomToast.showToast(getString(R.string.not_phone));
+            return;
+        }
+
+        StringRequest request = HttpProcessManager.getInstance().loginStudent(Constant.HOST_USER_LOGIN, telno, pass);
+        VolleyManager.getInstance(getApplicationContext()).addToRequestQueue(request);
 
     }
 
@@ -118,7 +128,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 LoginDataHelper.getInstance().setLoginUserInfo(data);
                 fillText(event.infoData);*/
             }
-            CustomToast.showToast(event.info);
+            CustomToast.showLongToast(event.info.toString());
+
         }
 
     }
