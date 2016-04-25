@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.pay.chip.easypay.R;
 import com.pay.chip.easypay.pages.person.activity.AboutUsAcitivity;
+import com.pay.chip.easypay.pages.person.activity.LoginActivity;
 import com.pay.chip.easypay.pages.person.activity.NewsActivity;
 import com.pay.chip.easypay.pages.person.activity.ShareActivity;
 import com.pay.chip.easypay.pages.person.activity.UserFeedBackActivity;
@@ -54,11 +55,15 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
 
     private void initView() {
         userLoginLayout = (RelativeLayout) mRootView.findViewById(R.id.user_login_layout);
-        titleText = (TextView) mRootView.findViewById(R.id.title_text);
+        userLoginLayout.setOnClickListener(this);
+        userCenterName = (TextView) mRootView.findViewById(R.id.user_center_name);
+        userCenterName.setOnClickListener(this);
         userCenterIcon = (AsyncCircleImageView) mRootView.findViewById(R.id.user_center_icon);
+        userCenterIcon.setOnClickListener(this);
+
+        titleText = (TextView) mRootView.findViewById(R.id.title_text);
 
         headIconArr = (ImageView) mRootView.findViewById(R.id.head_icon_arr);
-        userCenterName = (TextView) mRootView.findViewById(R.id.user_center_name);
         userNew = (RelativeLayout) mRootView.findViewById(R.id.user_new);
         userNew.setOnClickListener(this);
         myOrderIV = (ImageView) mRootView.findViewById(R.id.myOrderIV);
@@ -135,6 +140,16 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.user_option:
                 startActivity(new Intent(getActivity(), UserFeedBackActivity.class));
+                break;
+            case R.id.user_center_name:
+            case R.id.user_login_layout:
+            case R.id.user_center_icon:
+             /*   if (isLogin) {
+                    startActivityByFlag(getActivity(), EBConstant.UserFlag.USER_INFO.toString());
+                } else {
+                    startActivityByFlag(getActivity(), EBConstant.UserFlag.USER_LOGIN.toString());
+                }*/
+                startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
         }
 

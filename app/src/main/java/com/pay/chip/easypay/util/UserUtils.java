@@ -8,6 +8,11 @@ public class UserUtils {
     public static final int PASSWORD_MIN_LENGTH = 6;
     public static final int PASSWORD_MAX_LENGTH = 20;
 
+    //过滤sae实名制
+    public static String stripSAE(String json) {
+        return json.substring(0, json.indexOf("<"));
+    }
+
     /**
      * 检验邮箱合法性
      *

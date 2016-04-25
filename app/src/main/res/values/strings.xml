@@ -38,4 +38,9 @@
     <string name="invite_msg">分享好友</string>
     <string name="invite_now">立即邀请</string>
     <string name="no_msg">暂无消息</string>
+    <string name="login_pass">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="login_account">用户注册</string>
+    <string name="register">注册</string>
+    <string name="net_fail">网络连接失败</string>
 </resources>

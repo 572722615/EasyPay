@@ -14,7 +14,6 @@ import com.erban.pulltorefresh.PullToRefreshBase;
 import com.pay.chip.easypay.R;
 import com.pay.chip.easypay.pages.merchant.activity.MapLocationActivity;
 import com.pay.chip.easypay.pages.merchant.adapter.MerchantAdapter;
-import com.pay.chip.easypay.util.EBConstant;
 import com.pay.chip.easypay.util.EBPullToRefreshListView;
 
 
@@ -99,9 +98,7 @@ public class MerchantFragment extends Fragment implements View.OnClickListener{
         });*/
     }
 
-    private void requestData(EBConstant.REQUEST_TYPE requestPullUp) {
-//        HttpProcessManager.getInstance().getRecordList(requestPullUp, cardId, 1);
-    }
+
 
     public void firstRequestData(boolean needRefresh) {
         if (needRefresh) {

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_bg"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/login_head"
+            layout="@layout/top_title" />
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/grey_line"
+            android:layout_height="1px" />
+
+
+        <com.pay.chip.easypay.util.PhoneEditText
+            android:id="@+id/register_phone_edit"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="13dp"
+            />
+
+        <ImageView
+            android:paddingLeft="24dp"
+            android:layout_width="match_parent"
+            android:src="@color/grey_line"
+            android:background="@color/white"
+            android:layout_height="1px" />
+
+
+
+        <ImageView
+            android:layout_height="1px"
+            android:paddingLeft="24dp"
+            android:layout_width="match_parent"
+            android:src="@color/grey_line"
+            android:background="@color/white" />
+
+
+        <com.pay.chip.easypay.util.PassEditText
+            android:id="@+id/register_pass_edit"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/grey_line"
+            android:layout_height="1px" />
+
+
+        <Button
+            android:layout_marginTop="34dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/button_submit_unpressed"
+            android:id="@+id/register_btn"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:textSize="17sp"
+            android:text="@string/register" />
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
