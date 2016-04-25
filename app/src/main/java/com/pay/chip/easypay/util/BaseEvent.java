@@ -6,10 +6,10 @@ package com.pay.chip.easypay.util;
 
 public class BaseEvent {
     public int code;
-    public String info;
+    public String msg;
 
-    public BaseEvent(int code, String info){
+    public BaseEvent(int code, String msg){
         this.code = code;
-        this.info = info;
+        this.msg = msg;
     }
 }

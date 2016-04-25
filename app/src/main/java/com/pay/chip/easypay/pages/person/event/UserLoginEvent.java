@@ -1,5 +1,6 @@
 package com.pay.chip.easypay.pages.person.event;
 
+import com.pay.chip.easypay.pages.person.model.LoginUserInfo;
 import com.pay.chip.easypay.util.BaseEvent;
 
 /**
@@ -7,7 +8,9 @@ import com.pay.chip.easypay.util.BaseEvent;
  */
 public class UserLoginEvent extends BaseEvent {
 
-    public UserLoginEvent(int code, String info) {
-        super(code, info);
+    public LoginUserInfo loginUserInfo;
+    public UserLoginEvent(int code, String msg,LoginUserInfo loginUserInfo) {
+        super(code, msg);
+        this.loginUserInfo = loginUserInfo;
     }
 }

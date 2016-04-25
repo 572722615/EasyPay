@@ -20,7 +20,9 @@ import com.pay.chip.easypay.pages.person.activity.NewsActivity;
 import com.pay.chip.easypay.pages.person.activity.ShareActivity;
 import com.pay.chip.easypay.pages.person.activity.UserFeedBackActivity;
 import com.pay.chip.easypay.pages.person.activity.UserHelpActivity;
+import com.pay.chip.easypay.pages.person.model.LoginUserInfo;
 import com.pay.chip.easypay.util.AsyncCircleImageView;
+import com.pay.chip.easypay.util.LoginDataHelper;
 
 
 public class PersonFragment extends Fragment implements View.OnClickListener {
@@ -52,6 +54,8 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
     private RelativeLayout userAbout;
     private TextView userAboutIcon;
     private ImageView userAboutArr;
+
+    private LoginUserInfo loginUserInfo;
 
     private void initView() {
         userLoginLayout = (RelativeLayout) mRootView.findViewById(R.id.user_login_layout);
@@ -97,6 +101,16 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        boolean flag = LoginDataHelper.getInstance().isLogin();
+        if(flag){
+            loginUserInfo = LoginDataHelper.getInstance().getLoginUserInfo();
+            userCenterName.setText(loginUserInfo.telno);
+        }
     }
 
     @Override

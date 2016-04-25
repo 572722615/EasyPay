@@ -13,9 +13,11 @@ import android.widget.TextView;
 import com.android.volley.toolbox.StringRequest;
 import com.pay.chip.easypay.R;
 import com.pay.chip.easypay.pages.person.event.UserLoginEvent;
+import com.pay.chip.easypay.pages.person.model.LoginUserInfo;
 import com.pay.chip.easypay.util.Constant;
 import com.pay.chip.easypay.util.CustomToast;
 import com.pay.chip.easypay.util.HttpProcessManager;
+import com.pay.chip.easypay.util.LoginDataHelper;
 import com.pay.chip.easypay.util.PassEditText;
 import com.pay.chip.easypay.util.PhoneEditText;
 import com.pay.chip.easypay.util.UserUtils;
@@ -114,7 +116,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
 
         int code = event.code;
-        if (event.info == null) {
+        if (event.msg == null) {
             return;
         }
 
@@ -124,11 +126,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             return;
         } else {
             if (code == Constant.CODE_SUCCESS) {
-              /*  String data = StudentInfoData.DataBean.toJsonString(event.infoData);
+                String data = LoginUserInfo.toJsonString(event.loginUserInfo);
                 LoginDataHelper.getInstance().setLoginUserInfo(data);
-                fillText(event.infoData);*/
+//                fillText(event.infoData);
+                finish();
             }
-            CustomToast.showLongToast(event.info.toString());
+            CustomToast.showLongToast(event.msg.toString());
 
         }
 

@@ -14,14 +14,14 @@ public class BaseResult {
      */
 
     private int code;
-    private String info;
+    private String msg;
 
     public void setCode(int code) {
         this.code = code;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setInfo(String msg) {
+        this.msg = msg;
     }
 
     public int getCode() {
@@ -29,7 +29,7 @@ public class BaseResult {
     }
 
     public String getInfo() {
-        return info;
+        return msg;
     }
 
     public static BaseResult getFromJson(String json) {

@@ -7,7 +7,7 @@ import com.pay.chip.easypay.util.BaseEvent;
  */
 public class UserRegisterEvent extends BaseEvent {
 
-    public UserRegisterEvent(int code, String info) {
-        super(code, info);
+    public UserRegisterEvent(int code, String msg) {
+        super(code, msg);
     }
 }

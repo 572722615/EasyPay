@@ -8,6 +8,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.pay.chip.easypay.pages.person.event.UserLoginEvent;
 import com.pay.chip.easypay.pages.person.event.UserRegisterEvent;
 import com.pay.chip.easypay.pages.person.model.BaseResult;
+import com.pay.chip.easypay.pages.person.model.UserData;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,8 +39,8 @@ public class HttpProcessManager {
                     @Override
                     public void onResponse(String arg0) {
                         String res = stripSAE(arg0);
-                        BaseResult result = BaseResult.getFromJson(res);
-                        UserLoginEvent baseEvent = new UserLoginEvent(result.getCode(), result.getInfo());
+                        UserData result = UserData.getFromJson(res);
+                        UserLoginEvent baseEvent = new UserLoginEvent(result.getCode(), result.getInfo(),result.getData());
                         EventBus.getDefault().post(baseEvent);
                         return;
                     }
@@ -49,7 +50,7 @@ public class HttpProcessManager {
             public void onErrorResponse(VolleyError arg0) {
 
 
-                EventBus.getDefault().post(new UserLoginEvent(Constant.CODE_FAIL, null));
+                EventBus.getDefault().post(new UserLoginEvent(Constant.CODE_FAIL, null,null));
                 return;
             }
 

@@ -14,7 +14,7 @@ public class ServiceConfigManager {
     private static Context context = null;
 
     //用户账号相关
-    private static final String LOGIN_USER_INFO = "com.erban.LOGIN_USER_INFO";
+    private static final String LOGIN_USER_INFO = "com.chip.LOGIN_USER_INFO";
     private static final String BAIDU_MAP_INFO = "com.erban.BAIDU_MAP_INFO";
     private static final String SPECIAL_WIFI_INFO = "com.erban.SPECIAL_WIFI_INFO";
     private static final String LINKED_SPECIAL_WIFI = "com.erban.LINKED_SPECIAL_WIFI";

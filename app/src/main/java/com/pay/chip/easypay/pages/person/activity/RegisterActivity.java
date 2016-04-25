@@ -109,7 +109,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
 
 
         int code = event.code;
-        if (event.info == null) {
+        if (event.msg == null) {
             return;
         }
 
@@ -122,8 +122,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
               /*  String data = StudentInfoData.DataBean.toJsonString(event.infoData);
                 LoginDataHelper.getInstance().setLoginUserInfo(data);
                 fillText(event.infoData);*/
+                finish();
             }
-            CustomToast.showLongToast(event.info.toString());
+            CustomToast.showLongToast(event.msg.toString());
 
         }
 

@@ -10,6 +10,7 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.pay.chip.easypay.application.PayApplication;
 import com.pay.chip.easypay.pages.main.model.LocationData;
+import com.pay.chip.easypay.pages.person.model.LoginUserInfo;
 
 public class LoginDataHelper {
 
@@ -17,6 +18,7 @@ public class LoginDataHelper {
     private LocationClient mLocationClient;
     private BDLocation bDLocation;
     private LocationData locationData;
+    private LoginUserInfo loginUserInfo;
     private MyLocationListener mMyLocationListener;
 
 
@@ -105,6 +107,41 @@ public class LoginDataHelper {
             }
         }
         return locationData;
+    }
+
+    public synchronized LoginUserInfo getLoginUserInfo() {
+        if (null == loginUserInfo) {
+            String data = ServiceConfigManager.getInstance(
+                    PayApplication.getAppContext()).getLoginUserInfo();
+            if (!TextUtils.isEmpty(data)) {
+                loginUserInfo = LoginUserInfo.getFromJson(data);
+            }
+        }
+        return loginUserInfo;
+    }
+
+    public boolean isLogin() {
+        LoginUserInfo info = getLoginUserInfo();
+        if (info == null) {
+            return false;
+        }
+        return true;
+    }
+
+    public synchronized void setLoginUserInfo(String data) {
+        if (TextUtils.isEmpty(data)) {
+            return;
+        }
+        ServiceConfigManager.getInstance(PayApplication.getAppContext()).setLoginUserInfo(data);
+        loginUserInfo = null;
+        loginUserInfo = getLoginUserInfo();
+    }
+
+    public synchronized void clearLoginUserInfo() {
+
+        ServiceConfigManager.getInstance(PayApplication.getAppContext()).setLoginUserInfo("");
+        loginUserInfo = null;
+        loginUserInfo = getLoginUserInfo();
     }
 
 }
