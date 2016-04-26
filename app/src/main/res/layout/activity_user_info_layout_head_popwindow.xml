@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout   
+    xmlns:android="http://schemas.android.com/apk/res/android"  
+    android:layout_width="fill_parent"  
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"  
+    android:orientation="vertical"
+
+  >  
+<LinearLayout
+    android:background="@color/white"
+    android:id="@+id/user_head_pop"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     android:layout_alignParentBottom="true"  
+    android:orientation="vertical" >
+    <TextView
+        android:id="@+id/user_changeHead"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="@string/change_head"
+        android:textColor="@color/company_grey_text"
+        android:textSize="16sp" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:src="@color/grey_line"
+        android:background="@color/white"/>
+    <TextView
+        android:id="@+id/user_changeFromCamera"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="@string/change_from_camera"
+        android:textColor="@color/company_grey_text"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="37dp"
+        android:layout_marginRight="37dp"
+        android:src="@color/grey_line"
+        android:background="@color/white"/>
+
+    <TextView
+        android:id="@+id/user_changeFromSD"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="@string/change_from_sd"
+        android:textColor="@color/company_grey_text"
+        android:textSize="16sp" />
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="37dp"
+        android:layout_marginRight="37dp"
+        android:src="@color/grey_line"
+        android:background="@color/white"/>
+
+    <TextView
+        android:id="@+id/user_change_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="22dp"
+        android:paddingBottom="31dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textColor="@color/company_grey_text"
+        android:textSize="16sp" />
+
+</LinearLayout>
+</RelativeLayout>  

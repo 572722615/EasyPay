@@ -94,7 +94,7 @@ public class MainThreadHandler {
      *
      * @param c The Callable to run
      * @return The result of the callable
-     * @throws ExecutionException c's exception
+     * @throws java.util.concurrent.ExecutionException c's exception
      */
     public static <T> T runOnUiThreadBlocking(Callable<T> c) throws ExecutionException {
         FutureTask<T> task = new FutureTask<T>(c);

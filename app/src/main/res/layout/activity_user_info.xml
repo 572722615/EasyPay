@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_bg"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/user_info_layout"
+        android:background="@color/grey_bg">
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/grey_line"
+            android:layout_height="1px" />
+
+
+        <include
+            android:id="@+id/login_head"
+            layout="@layout/top_title" />
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/grey_line"
+            android:layout_height="1px" />
+        <!-- 头像 -->
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/user_icon_layout"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_marginLeft="22dp"
+                android:id="@+id/title"
+                android:text="头像"
+                android:textSize="14sp"
+                android:textColor="@color/company_grey_text"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_marginRight="25dp"
+                android:id="@+id/tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/user_info_arr_style" />
+
+            <com.pay.chip.easypay.util.AsyncCircleImageView
+                android:id="@+id/user_icon_text"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="51dp"
+                android:layout_height="51dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/tag"
+                android:layout_marginRight="20dp"
+                />
+
+
+            <ProgressBar
+                android:id="@+id/loadingProgressbar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:paddingLeft="20dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:src="@color/grey_line"
+            android:layout_height="1px" />
+        <!-- 昵称 -->
+
+
+
+        <!-- 姓名 -->
+
+        <RelativeLayout
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/user_name_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                style="@style/user_info_l_style" />
+
+            <ImageView
+                android:id="@+id/user_name_arr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/user_info_arr_style" />
+
+            <TextView
+                android:id="@+id/user_name_text"
+                android:layout_toLeftOf="@id/user_name_arr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/user_info_r_style" />
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:paddingLeft="20dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:src="@color/grey_line"
+            android:layout_height="1px" />
+
+        <!-- 性别 -->
+
+        <!-- 手机 -->
+
+        <RelativeLayout
+            android:id="@+id/user_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/user_phone_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phone"
+                style="@style/user_info_phone_style" />
+
+            <ImageView
+                android:id="@+id/user_phone_arr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/user_info_arr_style" />
+
+            <TextView
+                android:id="@+id/user_phone_text"
+                android:layout_toLeftOf="@id/user_phone_arr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/user_info_r_style" />
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:paddingLeft="20dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:src="@color/grey_line"
+            android:layout_height="1px" />
+
+
+        <Button
+            android:layout_marginTop="28dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/logout_button_bg_selector"
+            android:id="@+id/login_out"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:text="@string/login_out"
+            android:padding="10dp"
+            android:layout_marginBottom="50dp" />
+
+    </LinearLayout>
+</ScrollView>

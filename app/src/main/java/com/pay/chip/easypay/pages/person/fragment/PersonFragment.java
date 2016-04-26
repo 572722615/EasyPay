@@ -20,9 +20,15 @@ import com.pay.chip.easypay.pages.person.activity.NewsActivity;
 import com.pay.chip.easypay.pages.person.activity.ShareActivity;
 import com.pay.chip.easypay.pages.person.activity.UserFeedBackActivity;
 import com.pay.chip.easypay.pages.person.activity.UserHelpActivity;
+import com.pay.chip.easypay.pages.person.activity.UserInfoActivity;
+import com.pay.chip.easypay.pages.person.event.LoginOutEvent;
 import com.pay.chip.easypay.pages.person.model.LoginUserInfo;
 import com.pay.chip.easypay.util.AsyncCircleImageView;
+import com.pay.chip.easypay.util.CustomToast;
+import com.pay.chip.easypay.util.EBErrorCode;
 import com.pay.chip.easypay.util.LoginDataHelper;
+
+import de.greenrobot.event.EventBus;
 
 
 public class PersonFragment extends Fragment implements View.OnClickListener {
@@ -56,6 +62,10 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
     private ImageView userAboutArr;
 
     private LoginUserInfo loginUserInfo;
+
+    boolean isLogin;
+    Bitmap bitmap;
+
 
     private void initView() {
         userLoginLayout = (RelativeLayout) mRootView.findViewById(R.id.user_login_layout);
@@ -100,17 +110,43 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
 
     }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
 
     @Override
     public void onResume() {
         super.onResume();
-        boolean flag = LoginDataHelper.getInstance().isLogin();
-        if(flag){
+        isLogin = LoginDataHelper.getInstance().isLogin();
+        if(isLogin){
             loginUserInfo = LoginDataHelper.getInstance().getLoginUserInfo();
             userCenterName.setText(loginUserInfo.telno);
+            if(loginUserInfo.head!=null){
+                userCenterIcon.setImageURL(loginUserInfo.head,false);
+            }
         }
+        bitmap = ((BitmapDrawable) userCenterIcon.getDrawable()).getBitmap();
+
+        Palette.generateAsync(bitmap,
+                new Palette.PaletteAsyncListener() {
+                    @Override
+                    public void onGenerated(Palette palette) {
+                        Palette.Swatch vibrant =
+                                palette.getVibrantSwatch();
+                        userLoginLayout.setBackgroundColor(
+                                vibrant.getRgb());
+                        userCenterName.setTextColor(
+                                vibrant.getTitleTextColor());
+                    }
+                });
     }
 
     @Override
@@ -118,8 +154,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.personal_main_fragment, container, false);
         initView();
-        Bitmap bitmap = ((BitmapDrawable) userCenterIcon.getDrawable()).getBitmap();
-
+        bitmap = ((BitmapDrawable) userCenterIcon.getDrawable()).getBitmap();
         Palette.generateAsync(bitmap,
                 new Palette.PaletteAsyncListener() {
                     @Override
@@ -158,14 +193,32 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
             case R.id.user_center_name:
             case R.id.user_login_layout:
             case R.id.user_center_icon:
-             /*   if (isLogin) {
+                /*if (isLogin) {
                     startActivityByFlag(getActivity(), EBConstant.UserFlag.USER_INFO.toString());
                 } else {
                     startActivityByFlag(getActivity(), EBConstant.UserFlag.USER_LOGIN.toString());
                 }*/
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                if(isLogin){
+                    String loginInfo = LoginUserInfo.toJsonString(loginUserInfo);
+                    UserInfoActivity.startUserInfoActivity(getActivity(),loginInfo);
+                }else{
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
         }
 
+    }
+
+
+    public void onEventMainThread(LoginOutEvent event) {
+        int code = event.code;
+        if (code == EBErrorCode.EB_CODE_SUCCESS) {
+            userCenterIcon.setImageResource(R.drawable.default_icon);
+            String username;
+            username = getResources().getString(R.string.click_login);
+            userCenterName.setText(username);
+            CustomToast.showToast(getResources().getString(R.string.login_out_success));
+            return;
+        }
     }
 }

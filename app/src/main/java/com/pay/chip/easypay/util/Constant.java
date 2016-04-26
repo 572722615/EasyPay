@@ -15,6 +15,8 @@ public class Constant {
 
     public static String HOST = "http://chip.applinzi.com/index.php/Home/";
 
+    public static String UPLOAD_HEAD = "User/addHead";
+
     private static String USER_LOGIN = "User/login";
     private static String USER_REGISTER = "User/register";
 
@@ -41,6 +43,8 @@ public class Constant {
 
     public static String HOST_USER_LOGIN = HOST + USER_LOGIN;
     public static String HOST_USER_REGISTER = HOST + USER_REGISTER;
+    public static String UPLOAD_HEAD_URL = HOST+UPLOAD_HEAD;
+
     public static String HOST_STUDENT_FIND = HOST + STUDENT_FIND;
     public static String HOST_TEACHER_FIND = HOST + TEACHER_FIND;
     public static String HOST_STUDENT_WORK_UNFINISHED = HOST + WORK_CONTENT_UNFINISHED;
@@ -52,4 +56,5 @@ public class Constant {
     public static String HOST_WORK_ANSWER = HOST + WORK_ANSWER;
     public static String HOST_WORK_SUBMIT = HOST + WORK_SUBMIT;
     public static String HOST_TEACHER_REGISTER = HOST + TEACHER_REGISTER;
+    public static String KEY_CARD_LOGIN_INFO;
 }

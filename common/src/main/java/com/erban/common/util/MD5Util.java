@@ -99,7 +99,7 @@ public class MD5Util {
      *
      * @param file
      * @return
-     * @throws IOException
+     * @throws java.io.IOException
      */
     public static synchronized String getFileMD5String(File file) throws IOException {
         InputStream fis;
@@ -118,7 +118,7 @@ public class MD5Util {
      *
      * @param bytes
      * @return
-     * @throws IOException
+     * @throws java.io.IOException
      */
     public synchronized static String getMD5String(byte[] bytes) {
         stringMessageDigest.update(bytes);

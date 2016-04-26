@@ -30,4 +30,42 @@
         <attr name="background_ring_color" format="color"></attr>
         <attr name="background_ring_thickness" format="dimension"></attr>
     </declare-styleable>
+
+    <style name="user_info_l_style">
+        <item name="android:layout_marginLeft">22dp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/company_grey_text</item>
+    </style>
+
+    <style name="user_info_arr_style">
+        <item name="android:background">@drawable/user_info_arr_selector</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginRight">25dp</item>
+    </style>
+
+    <style name="user_info_phone_style">
+        <item name="android:layout_marginLeft">22dp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/company_grey</item>
+    </style>
+
+    <style name="user_info_r_style">
+        <item name="android:layout_marginLeft">22dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:textColor">@color/company_grey</item>
+    </style>
+
 </resources>

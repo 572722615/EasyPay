@@ -193,8 +193,8 @@ public class BitmapUtil {
                 .createBitmap(
                         drawable.getIntrinsicWidth(),
                         drawable.getIntrinsicHeight(),
-                        drawable.getOpacity() != PixelFormat.OPAQUE ? Config.ARGB_8888
-                                : Config.RGB_565);
+                        drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
+                                : Bitmap.Config.RGB_565);
         Canvas canvas = new Canvas(bitmap);
         drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
                 drawable.getIntrinsicHeight());
@@ -219,7 +219,7 @@ public class BitmapUtil {
     public static Bitmap blurBitmap(Bitmap bitmap, BlurType type) {
 
         //Let's create an empty bitmap with the same size of the bitmap we want to blur
-        Bitmap outBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Config.ARGB_8888);
+        Bitmap outBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
 
         //Instantiate a new Renderscript
         RenderScript rs = RenderScript.create(ApplicationDelegate.getApplication());

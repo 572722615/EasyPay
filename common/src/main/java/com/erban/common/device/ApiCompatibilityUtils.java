@@ -21,7 +21,7 @@ public class ApiCompatibilityUtils {
     }
 
     /**
-     * @see View#setBackground(Drawable)
+     * @see android.view.View#setBackground(android.graphics.drawable.Drawable)
      */
     @SuppressLint("NewApi")
     public static void setBackgroundForView(View view,

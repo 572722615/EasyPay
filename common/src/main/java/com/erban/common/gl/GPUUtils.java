@@ -108,7 +108,7 @@ public class GPUUtils {
                 && BaseUtils.supportsOpenGLES2(context);
         if (!bHardware)
             return false;
-        String phoneModel = Build.MODEL;
+        String phoneModel = android.os.Build.MODEL;
         return !BaseUtils.inList(GPU_BLACK_LIST, phoneModel);
     }
 
@@ -130,7 +130,7 @@ public class GPUUtils {
                     || _gpuModel.contains("VideoCore IV")
                     || _gpuModel.equalsIgnoreCase("N/A")) {
 
-                String phoneModel = Build.MODEL;
+                String phoneModel = android.os.Build.MODEL;
 
                 List<String> whiteList = GPU_CLOUD_WHITE_LIST;
                 if (whiteList == null || whiteList.size() == 0) {
@@ -140,7 +140,7 @@ public class GPUUtils {
                 if (BaseUtils.inList(whiteList, phoneModel)) {
                     return false;
                 }
-                String device = Build.DEVICE;
+                String device = android.os.Build.DEVICE;
                 if (BaseUtils.inList(whiteList, device)) {
                     return false;
                 }
@@ -171,7 +171,7 @@ public class GPUUtils {
         // http://en.wikipedia.org/wiki/VideoCore
         if (_gpuModel.equalsIgnoreCase("VideoCore IV HW")
                 || _gpuModel.contains("VideoCore IV")) {
-            String phoneModel = Build.MODEL;
+            String phoneModel = android.os.Build.MODEL;
 
             List<String> whiteList = GPU_CLOUD_WHITE_LIST;
             if (whiteList == null || whiteList.size() == 0) {
@@ -181,7 +181,7 @@ public class GPUUtils {
             if (BaseUtils.inList(whiteList, phoneModel)) {
                 return true;
             }
-            String device = Build.DEVICE;
+            String device = android.os.Build.DEVICE;
             if (BaseUtils.inList(whiteList, device)) {
                 return true;
             }
@@ -228,8 +228,8 @@ public class GPUUtils {
     }
 
     public boolean phoneModel(final String model) {
-        String phoneModel = Build.MODEL;
-        String device = Build.DEVICE;
+        String phoneModel = android.os.Build.MODEL;
+        String device = android.os.Build.DEVICE;
 
         boolean is = phoneModel.startsWith(model) || device.startsWith(model);
         return is;
@@ -251,7 +251,7 @@ public class GPUUtils {
     }
 
     private boolean isCustomCameraListSupport() {
-        String phoneModel = Build.MODEL;
+        String phoneModel = android.os.Build.MODEL;
         if (BaseUtils.inList(CUSTOM_CAMERA_BLACK_LIST, phoneModel)) {
             return false;
         }

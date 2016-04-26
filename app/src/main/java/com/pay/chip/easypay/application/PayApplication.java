@@ -3,6 +3,7 @@ package com.pay.chip.easypay.application;
 import android.app.Application;
 import android.content.Context;
 
+import com.erban.common.runtime.ApplicationDelegate;
 import com.pay.chip.easypay.util.LoginDataHelper;
 
 import java.io.File;
@@ -26,6 +27,7 @@ public class PayApplication extends Application {
         instance = this;
         appContext = this.getApplicationContext();
         LoginDataHelper.getInstance().initBaiduSDK(appContext);
+        ApplicationDelegate.setApplication(this);
     }
 
     @Override

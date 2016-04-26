@@ -44,4 +44,12 @@
     <string name="register">注册</string>
     <string name="net_fail">网络连接失败</string>
     <string name="not_phone">不是有效的手机号</string>
+    <string name="phone">手机号</string>
+    <string name="login_out">退出登录</string>
+    <string name="login_out_success">登出成功</string>
+    <string name="info">个人信息</string>
+    <string name="change_head">更换头像</string>
+    <string name="change_from_camera">拍照获取</string>
+    <string name="change_from_sd">本地相册</string>
+    <string name="cancel">取消</string>
 </resources>

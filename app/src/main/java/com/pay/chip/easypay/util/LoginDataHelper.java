@@ -1,5 +1,6 @@
 package com.pay.chip.easypay.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -10,7 +11,10 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.pay.chip.easypay.application.PayApplication;
 import com.pay.chip.easypay.pages.main.model.LocationData;
+import com.pay.chip.easypay.pages.person.event.LoginOutEvent;
 import com.pay.chip.easypay.pages.person.model.LoginUserInfo;
+
+import de.greenrobot.event.EventBus;
 
 public class LoginDataHelper {
 
@@ -60,6 +64,13 @@ public class LoginDataHelper {
         option.setIgnoreKillProcess(true);//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
         option.setIsNeedAddress(true);
         mLocationClient.setLocOption(option);
+    }
+
+    public void doLogout(Activity activity) {
+        LoginOutEvent loginOutEvent = new LoginOutEvent(0,null);
+        EventBus.getDefault().post(loginOutEvent);
+        //清除所有与用户相关缓存
+        LoginDataHelper.getInstance().clearLoginUserInfo();
     }
 
     public class MyLocationListener implements BDLocationListener {
