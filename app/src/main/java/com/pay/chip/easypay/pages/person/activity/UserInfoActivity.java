@@ -3,10 +3,9 @@ package com.pay.chip.easypay.pages.person.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -18,27 +17,29 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.pay.chip.easypay.R;
-import com.pay.chip.easypay.pages.person.event.LoginOutEvent;
+import com.pay.chip.easypay.pages.person.event.ChangeInfoEvent;
+import com.pay.chip.easypay.pages.person.model.HeadInfo;
 import com.pay.chip.easypay.pages.person.model.LoginUserInfo;
 import com.pay.chip.easypay.pages.person.view.UserPopWindow;
 import com.pay.chip.easypay.util.AsyncCircleImageView;
 import com.pay.chip.easypay.util.Constant;
 import com.pay.chip.easypay.util.LoginDataHelper;
 import com.pay.chip.easypay.util.SelectIconHelper;
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.Headers;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.MultipartBuilder;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
+
+import org.apache.http.Header;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 
 import de.greenrobot.event.EventBus;
+
+import static com.pay.chip.easypay.util.UserUtils.stripSAE;
 
 public class UserInfoActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -206,7 +207,16 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
 
     };
 
-    public void onEventMainThread(LoginOutEvent event) {
+    public void onEventMainThread(ChangeInfoEvent event) {
+        if(event==null){
+            return;
+        }
+        userIconText.setImageURL(event.info.getData().toString(),false);
+        LoginUserInfo data = LoginDataHelper.getInstance().getLoginUserInfo();
+        data.head = event.info.getData();
+        String dataInfo = LoginUserInfo.toJsonString(data);
+        LoginDataHelper.getInstance().setLoginUserInfo(dataInfo);
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -214,34 +224,29 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         if (resultCode != RESULT_CANCELED) {
             switch (requestCode) {
                 case SelectIconHelper.SELECT_PIC_CODE:
-//                    SelectIconHelper.getInstance().startPhotoCrop(this, intent.getData());
                     if (data != null) {
-//                        Bundle extras = data.getExtras();
                         headUri = data.getData();
                         if(headUri!=null){
                             try
                             {
-                                // 读取uri所在的图片
-                                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), headUri);
-                                uploadImg(bitmap);
+                                uploadImg(headUri);
                             }catch (Exception  e){
 
                             }
-                            /**
-                             * 上传服务器代码
-                             */
-//                        setPicToView(head);//保存在SD卡中
-//                        ivHead.setImageBitmap(head);//用ImageView显示出来
                         }
                     }
                     break;
                 case SelectIconHelper.SELECT_CAMERA_CODE:
-//                    if (intent == null || intent.getData() == null) {
-//                        SelectIconHelper.getInstance().startPhotoCrop(this, SelectIconHelper.getInstance().getCameraTempUri());
-//                    } else {
-//                        SelectIconHelper.getInstance().startPhotoCrop(this, intent.getData());
-//                    }
 
+                    headUri = data.getData();
+                    if(headUri!=null){
+                        try
+                        {
+                            uploadImg(headUri);
+                        }catch (Exception  e){
+
+                        }
+                    }
                     break;
                 default:
                     break;
@@ -252,56 +257,71 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
 
         }
 
-    public void uploadImg(Bitmap bitmap) throws AuthFailureError {
+    public void uploadImg(Uri bitmap) throws Exception {
         mDialog.setMessage("图片上传中...");
         mDialog.show();
 
-       /* UploadApi.uploadImg(UserInfoActivity.this, phone,bitmap, new ResponseListener<String>() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.v("zgy", "===========VolleyError=========" + error);
-                Toast.makeText(UserInfoActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
-                mDialog.dismiss();
-            }
 
-            @Override
-            public void onResponse(String response) {
-              *//*  response = response.substring(response.indexOf("img src="));
-                response = response.substring(8, response.indexOf("/>"));
-                Log.v("zgy", "===========onResponse=========" + response);*//*
-                mDialog.dismiss();
-                Toast.makeText(UserInfoActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
-            }
-        }) ;*/
 
-        OkHttpClient mOkHttpClient = new OkHttpClient();
-        File file = new File(Environment.getExternalStorageDirectory(), "balabala.mp4");
+        Uri uri = bitmap;
 
-        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
+        String[] proj = { MediaStore.Images.Media.DATA };
 
-        RequestBody requestBody = new MultipartBuilder()
-                .type(MultipartBuilder.FORM)
-                .addPart(Headers.of(
-                                "Content-Disposition",
-                                "form-data; name=\"telno\""),
-                        RequestBody.create(null, phone))
-                .addPart(Headers.of(
-                        "Content-Disposition",
-                        "form-data; name=head;"
-                        ), fileBody)
-                .build();
+        Cursor actualimagecursor = managedQuery(uri, proj, null, null, null);
 
-        Request request = new Request.Builder()
-                .url("http://192.168.1.103:8080/okHttpServer/fileUpload")
-                .post(requestBody)
-                .build();
+        int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 
-        Call call = mOkHttpClient.newCall(request);
+        actualimagecursor.moveToFirst();
+
+        String img_path = actualimagecursor.getString(actual_image_column_index);
+
+        File file = new File(img_path);
+
+        postFile(file);
+
 
 
 
     }
 
+
+    public void postFile(File file) throws Exception{
+        if(file.exists() && file.length()>0){
+            AsyncHttpClient client = new AsyncHttpClient();
+            RequestParams params = new RequestParams();
+            params.put("head", file);
+            params.put("telno", phone);
+            client.post(Constant.UPLOAD_HEAD_URL, params,new AsyncHttpResponseHandler() {
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                    try {
+                        String s = new String(responseBody, "utf-8");
+                        String res = stripSAE(s);
+                        HeadInfo info = HeadInfo.getFromJson(res);
+                        Toast.makeText(UserInfoActivity.this, "上传成功", Toast.LENGTH_LONG).show();
+                        EventBus.getDefault().post(new ChangeInfoEvent(info));
+
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    mDialog.dismiss();
+                }
+
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers,
+                                      byte[] responseBody, Throwable error) {
+                    Toast.makeText(UserInfoActivity.this, "上传失败", Toast.LENGTH_LONG).show();
+                    mDialog.dismiss();
+                }
+            });
+        }else{
+            Toast.makeText(this, "文件不存在",  Toast.LENGTH_LONG).show();
+        }
+
+    }
 
 
 }

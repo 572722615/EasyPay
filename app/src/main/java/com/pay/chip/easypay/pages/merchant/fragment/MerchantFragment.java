@@ -4,17 +4,28 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.android.volley.toolbox.StringRequest;
 import com.baidu.mapapi.SDKInitializer;
 import com.erban.pulltorefresh.PullToRefreshBase;
 import com.pay.chip.easypay.R;
 import com.pay.chip.easypay.pages.merchant.activity.MapLocationActivity;
 import com.pay.chip.easypay.pages.merchant.adapter.MerchantAdapter;
+import com.pay.chip.easypay.pages.merchant.event.MerchantEvent;
+import com.pay.chip.easypay.pages.merchant.model.MerchantModel;
+import com.pay.chip.easypay.util.Constant;
 import com.pay.chip.easypay.util.EBPullToRefreshListView;
+import com.pay.chip.easypay.util.HttpProcessManager;
+import com.pay.chip.easypay.util.VolleyManager;
+
+import java.util.ArrayList;
+
+import de.greenrobot.event.EventBus;
 
 
 public class MerchantFragment extends Fragment implements View.OnClickListener{
@@ -27,14 +38,18 @@ public class MerchantFragment extends Fragment implements View.OnClickListener{
     private Handler mHandler = new Handler();
     public ListView mListView;
 
-    public MerchantFragment() {
-        // Required empty public constructor
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initView();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     private void initView() {
@@ -46,11 +61,15 @@ public class MerchantFragment extends Fragment implements View.OnClickListener{
         }, 1000);
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         SDKInitializer.initialize(getActivity().getApplicationContext());
         mRootView = inflater.inflate(R.layout.fragment_merchant, container, false);
+        initView();
         find = (Button) mRootView.findViewById(R.id.find);
         find.setOnClickListener(this);
 
@@ -58,10 +77,10 @@ public class MerchantFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initPullToRefresh() {
-//        pullToRefreshLV = (EBPullToRefreshListView) mRootView.findViewById(R.id.pullToRefreshLV);
-        /*pullToRefreshLV.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+       pullToRefreshLV = (EBPullToRefreshListView) mRootView.findViewById(R.id.pullToRefreshLV);
+        pullToRefreshLV.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         lastMode = pullToRefreshLV.getMode();
-
+        merchantAdapter = new MerchantAdapter(getActivity());
 
         mListView = pullToRefreshLV.getRefreshableView();
 //        mListView.setSelector(getResources().getDrawable(R.drawable.transparent));
@@ -74,12 +93,12 @@ public class MerchantFragment extends Fragment implements View.OnClickListener{
         pullToRefreshLV.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                requestData(EBConstant.REQUEST_TYPE.REQUEST_PULL_DOWN);
+                request();
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-//                requestData(EBConstant.REQUEST_TYPE.REQUEST_PULL_UP);
+                request();
             }
 
             @Override
@@ -93,11 +112,16 @@ public class MerchantFragment extends Fragment implements View.OnClickListener{
                 if (pullToRefreshLV.getMode() != PullToRefreshBase.Mode.BOTH) {
                     return;
                 }
-                requestData(EBConstant.REQUEST_TYPE.REQUEST_PULL_UP);
+//                requestData(EBConstant.REQUEST_TYPE.REQUEST_PULL_UP);
+                request();
             }
-        });*/
+        });
     }
 
+    private void request() {
+        StringRequest request =  HttpProcessManager.getInstance().findMerchant(Constant.HOST_MERCHANT_FIND,null,null);
+        VolleyManager.getInstance(getActivity().getApplicationContext()).addToRequestQueue(request);
+    }
 
 
     public void firstRequestData(boolean needRefresh) {
@@ -122,5 +146,14 @@ public class MerchantFragment extends Fragment implements View.OnClickListener{
                 MapLocationActivity.startMapLocation(getActivity());
                 break;
         }
+    }
+
+    public void onEventMainThread(MerchantEvent event) {
+        pullToRefreshLV.onRefreshComplete();
+        if (event == null||event.data==null) {
+            return;
+        }
+
+        merchantAdapter.setData((ArrayList<MerchantModel.DataEntity>) event.data);
     }
 }

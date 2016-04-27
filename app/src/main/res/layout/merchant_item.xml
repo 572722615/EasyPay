@@ -13,6 +13,7 @@
         android:layout_height="80dp"
         android:scaleType="fitXY"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/merchant_discount_today_default_bg"
         />
 
@@ -31,6 +32,7 @@
             android:textColor="#343434"
             android:layout_alignParentLeft="true"
             android:maxLines="2"
+            android:text="a"
             android:ellipsize="end"
             android:layout_alignParentTop="true" />
 
@@ -48,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:layout_alignParentLeft="true"
-                android:text="¥28"
+                android:text="d"
                 android:layout_centerVertical="true" />
 
             <TextView
@@ -59,7 +61,8 @@
                 android:textColor="#9B9B9B"
                 android:layout_alignParentRight="true"
                 android:text="已领取800"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 

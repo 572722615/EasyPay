@@ -36,6 +36,5 @@ dependencies {
     compile project(':pulltorefresh')
     compile project(':imageloader')
     compile project(':common')
-    compile files('libs/httpmime-4.2.5.jar')
-    compile files('libs/okhttp-2.3.0.jar')
+    compile files('libs/android-async-http-1.4.6.jar')
 }

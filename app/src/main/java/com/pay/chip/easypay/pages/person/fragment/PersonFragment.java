@@ -133,8 +133,8 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
                 userCenterIcon.setImageURL(loginUserInfo.head,false);
             }
         }
+        userCenterIcon.setDrawingCacheEnabled(true);
         bitmap = ((BitmapDrawable) userCenterIcon.getDrawable()).getBitmap();
-
         Palette.generateAsync(bitmap,
                 new Palette.PaletteAsyncListener() {
                     @Override
@@ -154,19 +154,29 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.personal_main_fragment, container, false);
         initView();
-        bitmap = ((BitmapDrawable) userCenterIcon.getDrawable()).getBitmap();
-        Palette.generateAsync(bitmap,
-                new Palette.PaletteAsyncListener() {
-                    @Override
-                    public void onGenerated(Palette palette) {
-                        Palette.Swatch vibrant =
-                                palette.getVibrantSwatch();
-                        userLoginLayout.setBackgroundColor(
-                                vibrant.getRgb());
-                        userCenterName.setTextColor(
-                                vibrant.getTitleTextColor());
-                    }
-                });
+        isLogin = LoginDataHelper.getInstance().isLogin();
+        if(isLogin){
+            loginUserInfo = LoginDataHelper.getInstance().getLoginUserInfo();
+            userCenterName.setText(loginUserInfo.telno);
+            if(loginUserInfo.head!=null){
+                userCenterIcon.setImageURL(loginUserInfo.head,false);
+                userCenterIcon.setDrawingCacheEnabled(true);
+                bitmap = ((BitmapDrawable) userCenterIcon.getDrawable()).getBitmap();
+                Palette.generateAsync(bitmap,
+                        new Palette.PaletteAsyncListener() {
+                            @Override
+                            public void onGenerated(Palette palette) {
+                                Palette.Swatch vibrant =
+                                        palette.getVibrantSwatch();
+                                userLoginLayout.setBackgroundColor(
+                                        vibrant.getRgb());
+                                userCenterName.setTextColor(
+                                        vibrant.getTitleTextColor());
+                            }
+                        });
+            }
+        }
+
         return mRootView;
     }
 
