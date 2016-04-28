@@ -21,6 +21,7 @@ public class Constant {
     private static String USER_REGISTER = "User/register";
 
     private static String MERCHANT_FIND = "Merchant/find";
+    private static String GOODS_FIND = "Goods/find";
 
     private static String STUDENT_FIND = "Student/find";
     private static String TEACHER_FIND = "Teacher/find";
@@ -42,10 +43,20 @@ public class Constant {
     public static final String CONTENT_ANSWER = "answer_content";
     public static final String PASS = "pass";
     public static final String TELNO = "telno";
+    public static final String LAT = "lat";
+    public static final String LNG = "lng";
+    public static String M_ID = "m_id";
+    public static String PIC = "pic";
+    public static String NAME = "name";
+    public static String PRICE = "price";
+    public static String DESC = "desc";
+
+
 
     public static String HOST_USER_LOGIN = HOST + USER_LOGIN;
     public static String HOST_USER_REGISTER = HOST + USER_REGISTER;
     public static String HOST_MERCHANT_FIND = HOST + MERCHANT_FIND;
+    public static String HOST_GOODS_FIND = HOST + GOODS_FIND;
     public static String UPLOAD_HEAD_URL = HOST+UPLOAD_HEAD;
 
     public static String HOST_STUDENT_FIND = HOST + STUDENT_FIND;

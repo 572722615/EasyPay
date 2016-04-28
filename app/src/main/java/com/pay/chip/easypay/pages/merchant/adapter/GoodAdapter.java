@@ -11,18 +11,18 @@ import android.widget.TextView;
 
 import com.erban.imageloader.AsyncImageView;
 import com.pay.chip.easypay.R;
-import com.pay.chip.easypay.pages.merchant.activity.GoodListActivity;
-import com.pay.chip.easypay.pages.merchant.model.MerchantModel;
+import com.pay.chip.easypay.pages.merchant.activity.GoodDetailActivity;
+import com.pay.chip.easypay.pages.merchant.model.GoodModel;
 
 import java.util.ArrayList;
 
 /**
  * Created by DavidLee on 2016/3/9.
  */
-public class MerchantAdapter extends BaseAdapter {
+public class GoodAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<MerchantModel.DataEntity> dataList = new ArrayList<>();
+    private ArrayList<GoodModel.DataEntity> dataList = new ArrayList<>();
     private String year;
     private String month;
     private String day;
@@ -30,7 +30,7 @@ public class MerchantAdapter extends BaseAdapter {
     boolean isFirst = true;
     boolean isLast = true;
 
-    public MerchantAdapter(Context context) {
+    public GoodAdapter(Context context) {
         this.context = context;
 
     }
@@ -39,7 +39,7 @@ public class MerchantAdapter extends BaseAdapter {
 
 
 
-    public void setData(ArrayList<MerchantModel.DataEntity> data) {
+    public void setData(ArrayList<GoodModel.DataEntity> data) {
         if (data == null) {
             return;
         }
@@ -48,7 +48,7 @@ public class MerchantAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void addToTail(ArrayList<MerchantModel.DataEntity> data) {
+    public void addToTail(ArrayList<GoodModel.DataEntity> data) {
         if (data == null) {
             return;
         }
@@ -62,7 +62,7 @@ public class MerchantAdapter extends BaseAdapter {
     }
 
     @Override
-    public MerchantModel.DataEntity getItem(int position) {
+    public GoodModel.DataEntity getItem(int position) {
         return dataList.get(position);
     }
 
@@ -78,30 +78,31 @@ public class MerchantAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.merchant_item, parent, false);
+            convertView = inflater.inflate(R.layout.good_item, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.picAIV = (AsyncImageView) convertView.findViewById(R.id.picAIV);
-            viewHolder.item_layout = (LinearLayout) convertView.findViewById(R.id.item_layout);
+            viewHolder.itemLayout = (LinearLayout) convertView.findViewById(R.id.item_layout);
             viewHolder.desTV = (TextView) convertView.findViewById(R.id.desTV);
             viewHolder.priceRL = (RelativeLayout) convertView.findViewById(R.id.priceRL);
-            viewHolder.addressTV = (TextView) convertView.findViewById(R.id.addressTV);
+            viewHolder.priceTV = (TextView) convertView.findViewById(R.id.priceTV);
             viewHolder.getTV = (TextView) convertView.findViewById(R.id.getTV);
             convertView.setTag(viewHolder);
         }
         viewHolder = (ViewHolder) convertView.getTag();
-        final MerchantModel.DataEntity data = dataList.get(position);
+        final GoodModel.DataEntity data = dataList.get(position);
 
 
+        if(null!=data.getPic()){
+            viewHolder.picAIV.setImageURL(data.getPic(),false);
+        }
 
-        viewHolder.picAIV.setImageURL(data.getHead(),false);
         viewHolder.desTV.setText(data.getName());
-        viewHolder.addressTV.setText(data.getAddress());
+        viewHolder.priceTV.setText(data.getPrice());
 
-        viewHolder.item_layout.setOnClickListener(new View.OnClickListener() {
+        viewHolder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                GoodListActivity.startGoodListActivity(context,data.getId());
+                GoodDetailActivity.startGoodDetailActivity(context,data.getPic(),data.getName(),data.getPrice(),data.getDesc());
             }
         });
 
@@ -116,9 +117,9 @@ public class MerchantAdapter extends BaseAdapter {
         public AsyncImageView picAIV;
         public TextView desTV;
         public RelativeLayout priceRL;
-        public TextView addressTV;
+        public TextView priceTV;
         public TextView getTV;
-        public LinearLayout item_layout;
+        public LinearLayout itemLayout;
 
 
     }

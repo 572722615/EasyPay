@@ -5,7 +5,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.pay.chip.easypay.pages.merchant.event.GoodEvent;
 import com.pay.chip.easypay.pages.merchant.event.MerchantEvent;
+import com.pay.chip.easypay.pages.merchant.model.GoodModel;
 import com.pay.chip.easypay.pages.merchant.model.MerchantModel;
 import com.pay.chip.easypay.pages.person.event.UserLoginEvent;
 import com.pay.chip.easypay.pages.person.event.UserRegisterEvent;
@@ -109,7 +111,7 @@ public class HttpProcessManager {
     }
 
 
-    public StringRequest findMerchant(String url, final String user_telno, final String user_pass) {
+    public StringRequest findMerchant(String url, final String lat, final String lng) {
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
 
@@ -137,8 +139,44 @@ public class HttpProcessManager {
             protected Map<String, String> getParams() throws AuthFailureError {
                 //传递参数
                 Map<String, String> map = new HashMap<String, String>();
-//                map.put(Constant.TELNO, user_telno);
-//                map.put(Constant.PASS, user_pass);
+                map.put(Constant.LAT, lat);
+                map.put(Constant.LNG, lng);
+                return map;
+            }
+
+        };
+        return request;
+    }
+
+    public StringRequest findGoods(String url, final String id) {
+        StringRequest request = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String arg0) {
+                        String res = stripSAE(arg0);
+                        GoodModel result = GoodModel.getFromJson(res);
+                        GoodEvent baseEvent = new GoodEvent(result.getCode(),result.getMsg() ,result.getData());
+                        EventBus.getDefault().post(baseEvent);
+                        return;
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError arg0) {
+
+
+                EventBus.getDefault().post(new GoodEvent(Constant.CODE_FAIL, null,null));
+                return;
+            }
+
+
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //传递参数
+                Map<String, String> map = new HashMap<String, String>();
+                map.put(Constant.M_ID, id);
                 return map;
             }
 

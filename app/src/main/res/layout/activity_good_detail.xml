@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/detail_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/company_grey"
+    tools:context="com.pay.chip.easypay.pages.merchant.activity.GoodDetailActivity">
+
+    <include
+        android:id="@+id/login_head"
+        layout="@layout/top_title" />
+
+    <com.erban.imageloader.AsyncImageView
+        android:id="@+id/good_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        />
+
+    <TextView
+        android:id="@+id/good_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="name"
+        android:textColor="@color/company_grey_text"
+        android:textSize="15sp"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        />
+
+
+    <TextView
+        android:id="@+id/good_price"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="20"
+        android:textColor="@color/company_grey_text"
+        android:textSize="15sp"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+
+        />
+
+    <TextView
+        android:id="@+id/good_desc"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="desc"
+        android:textColor="@color/company_grey_text"
+        android:textSize="15sp"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        />
+
+
+
+</LinearLayout>

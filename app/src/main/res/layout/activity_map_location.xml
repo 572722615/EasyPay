@@ -22,6 +22,7 @@
             android:imeOptions="actionSearch"
             android:paddingLeft="5dp"
             android:singleLine="true"
+            android:textColor="#929292"
             android:textColorHint="#939393"
             android:textSize="14sp"></EditText>
 

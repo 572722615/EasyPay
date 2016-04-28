@@ -16,6 +16,7 @@ import com.erban.pulltorefresh.PullToRefreshBase;
 import com.pay.chip.easypay.R;
 import com.pay.chip.easypay.pages.merchant.activity.MapLocationActivity;
 import com.pay.chip.easypay.pages.merchant.adapter.MerchantAdapter;
+import com.pay.chip.easypay.pages.merchant.event.LocationChangeEvent;
 import com.pay.chip.easypay.pages.merchant.event.MerchantEvent;
 import com.pay.chip.easypay.pages.merchant.model.MerchantModel;
 import com.pay.chip.easypay.util.Constant;
@@ -38,6 +39,8 @@ public class MerchantFragment extends Fragment implements View.OnClickListener{
     private Handler mHandler = new Handler();
     public ListView mListView;
 
+    private String lat = "0.0";
+    private String lng = "0.0";
 
 
     @Override
@@ -119,7 +122,7 @@ public class MerchantFragment extends Fragment implements View.OnClickListener{
     }
 
     private void request() {
-        StringRequest request =  HttpProcessManager.getInstance().findMerchant(Constant.HOST_MERCHANT_FIND,null,null);
+        StringRequest request =  HttpProcessManager.getInstance().findMerchant(Constant.HOST_MERCHANT_FIND,lat,lng);
         VolleyManager.getInstance(getActivity().getApplicationContext()).addToRequestQueue(request);
     }
 
@@ -156,4 +159,24 @@ public class MerchantFragment extends Fragment implements View.OnClickListener{
 
         merchantAdapter.setData((ArrayList<MerchantModel.DataEntity>) event.data);
     }
+
+    public void onEventMainThread(final LocationChangeEvent event) {
+
+        if(event==null){
+            return;
+        }
+        lat = event.latitude+"";
+        lng = event.longitude+"";
+
+        mHandler.postDelayed(new Runnable() {
+            public void run() {
+//                pullToRefreshLV.setRefreshing();
+                StringRequest request =  HttpProcessManager.getInstance().findMerchant(Constant.HOST_MERCHANT_FIND,lat,lng);
+                VolleyManager.getInstance(getActivity().getApplicationContext()).addToRequestQueue(request);
+            }
+        }, 1000);
+
+    }
+
+
 }

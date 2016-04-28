@@ -76,6 +76,16 @@ public class MerchantModel {
         private String geohash;
         private String head;
 
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        private String address;
+
         public void setId(String id) {
             this.id = id;
         }

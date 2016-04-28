@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pay.chip.easypay.pages.merchant.fragment.MerchantFragment">
+
+    <include
+        android:id="@+id/login_head"
+        layout="@layout/top_title" />
+
+
+    <com.pay.chip.easypay.util.EBPullToRefreshListView
+        android:id="@+id/pullToRefreshLV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/login_head"
+        android:background="#ececec"
+        android:divider="@null"
+        android:fadingEdge="none">
+
+    </com.pay.chip.easypay.util.EBPullToRefreshListView>
+
+    <com.pay.chip.easypay.util.EBEmptyView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/login_head"
+        android:orientation="horizontal"
+        android:visibility="gone" />
+
+
+</RelativeLayout>

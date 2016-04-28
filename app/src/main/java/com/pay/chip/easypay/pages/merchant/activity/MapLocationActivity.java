@@ -51,10 +51,13 @@ import com.baidu.mapapi.search.poi.PoiSearch;
 import com.pay.chip.easypay.R;
 import com.pay.chip.easypay.pages.main.model.LocationData;
 import com.pay.chip.easypay.pages.merchant.adapter.PoiAddressListAdapter;
+import com.pay.chip.easypay.pages.merchant.event.LocationChangeEvent;
 import com.pay.chip.easypay.pages.merchant.model.PoiItemModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 public class MapLocationActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -87,6 +90,8 @@ public class MapLocationActivity extends AppCompatActivity implements View.OnCli
     private LocationClient mLocationClient;
     private MyLocationListenner mLocationListener = new MyLocationListenner();
     private boolean mIsFirstLocate = true;     // 是否首次定位
+    private double mLat;
+    private double mLng;
 
     public static void startMapLocation(Context context){
         Intent intent = new Intent(context, MapLocationActivity.class);
@@ -208,6 +213,8 @@ public class MapLocationActivity extends AppCompatActivity implements View.OnCli
 
                             PoiItemModel itemModel = (PoiItemModel)listView.getItemAtPosition(position);
                             setSelectedPostion(itemModel.latitude, itemModel.longitude, true, true);
+                            mLat = itemModel.latitude;
+                            mLng = itemModel.longitude;
                         }
                     });
 
@@ -283,6 +290,8 @@ public class MapLocationActivity extends AppCompatActivity implements View.OnCli
                         listView.setItemChecked(position, true);
                         PoiItemModel itemModel = (PoiItemModel)listView.getItemAtPosition(position);
                         setSelectedPostion(itemModel.latitude, itemModel.longitude, true, false);;
+                        mLat = itemModel.latitude;
+                        mLng = itemModel.longitude;
                     }
                 });
 
@@ -365,6 +374,7 @@ public class MapLocationActivity extends AppCompatActivity implements View.OnCli
                 }
                 break;
             case R.id.discountSure:
+                EventBus.getDefault().post(new LocationChangeEvent(mLat,mLng));
                 finish();
                 break;
         }
