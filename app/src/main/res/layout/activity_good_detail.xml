@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/company_grey"
+    android:background="@color/white"
     tools:context="com.pay.chip.easypay.pages.merchant.activity.GoodDetailActivity">
 
     <include
@@ -28,20 +28,23 @@
         android:textSize="15sp"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
+        android:background="@color/item_back"
         />
 
 
-    <TextView
-        android:id="@+id/good_price"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="20"
-        android:textColor="@color/company_grey_text"
-        android:textSize="15sp"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp"
 
-        />
+        <TextView
+            android:id="@+id/good_price"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="20"
+            android:textColor="@color/red"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:background="@color/item_back"
+            />
+
 
     <TextView
         android:id="@+id/good_desc"
@@ -52,6 +55,7 @@
         android:textSize="15sp"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
+        android:background="@color/item_back"
         />
 
 

@@ -54,4 +54,5 @@
     <string name="news_title">消息中心</string>
     <string name="good_list">商品列表</string>
     <string name="good_detail">商品详情</string>
+    <string name="price">价格：</string>
 </resources>

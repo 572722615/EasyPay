@@ -45,19 +45,7 @@ public class GoodDetailActivity extends AppCompatActivity implements View.OnClic
         goodDesc = (TextView) findViewById(R.id.good_desc);
         goodDesc.setText(desc);
 
-        Bitmap bitmap = ((BitmapDrawable) goodPic.getDrawable()).getBitmap();
-        Palette.generateAsync(bitmap,
-                new Palette.PaletteAsyncListener() {
-                    @Override
-                    public void onGenerated(Palette palette) {
-                        Palette.Swatch vibrant =
-                                palette.getVibrantSwatch();
-                     /*   detail_layout.setBackgroundColor(
-                                vibrant.getRgb());*/
-                        detail_layout.setBackgroundColor(vibrant.getRgb());
 
-                    }
-                });
     }
 
 
@@ -100,6 +88,15 @@ public class GoodDetailActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Bitmap bitmap = ((BitmapDrawable) goodPic.getDrawable()).getBitmap();
+
+        Palette palette = Palette.generate(bitmap);
+            detail_layout.setBackgroundColor(palette.getLightVibrantColor(getResources().getColor(R.color.light)));
+
+    }
 
     @Override
     public void onClick(View view) {
