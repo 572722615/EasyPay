@@ -26,6 +26,7 @@ public class AsyncCircleImageView extends ImageView {
     public static final String TAG = AsyncCircleImageView.class.getSimpleName();
     private String mUrl;
     private static final byte NONE = 0;
+    public Bitmap bmp;
 
     public interface ImageDownloadListener {
         void success(Bitmap bitmap);
@@ -166,7 +167,7 @@ public class AsyncCircleImageView extends ImageView {
         ImageLoader.getInstance(getContext()).loadAvatorImage(context, new LoaderListener<Bitmap>() {
             @Override
             public void onLoadSuccess(KLoadContext<Bitmap> loadContext) {
-                final Bitmap bmp = loadContext.getResult();
+                bmp = loadContext.getResult();
                 if (null != bmp && url.equals(mUrl)) {
                     MainThreadHandler.runOnUiThread(new Runnable() {
                         @Override
@@ -226,6 +227,10 @@ public class AsyncCircleImageView extends ImageView {
             mMaxSpace = DimenUtils.dp2px(getContext(), 50.0f);
         }
         return mMaxSpace;
+    }
+
+    public Bitmap getImageBitmap(){
+        return bmp;
     }
 
 }

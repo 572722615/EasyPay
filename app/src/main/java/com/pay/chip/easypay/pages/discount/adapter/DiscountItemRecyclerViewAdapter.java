@@ -1,40 +1,52 @@
 package com.pay.chip.easypay.pages.discount.adapter;
 
+import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pay.chip.easypay.R;
-import com.pay.chip.easypay.pages.discount.model.DummyContent;
+import com.pay.chip.easypay.pages.discount.model.DiscountModel;
+import com.pay.chip.easypay.util.AsyncCircleImageView;
 import com.pay.chip.easypay.util.LoadMoreRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DiscountItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<DummyContent.DummyItem> mValues;
+    private static int IO_BUFFER_SIZE = 1024;
+    private List<DiscountModel.DummyItem> mValues = new ArrayList<DiscountModel.DummyItem>();
     private boolean mIsStagger;
+    Bitmap bitmap;
+    public Context context;
 
-    public DiscountItemRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
+    public DiscountItemRecyclerViewAdapter(List<DiscountModel.DummyItem> items) {
         mValues = items;
+    }
+
+    public DiscountItemRecyclerViewAdapter() {
+
+    }
+
+    public DiscountItemRecyclerViewAdapter(Context context) {
+        this.context = context;
     }
 
     public void switchMode(boolean mIsStagger) {
         this.mIsStagger = mIsStagger;
     }
 
-    public void setData(List<DummyContent.DummyItem> datas) {
+    public void setData(List<DiscountModel.DummyItem> datas) {
         mValues = datas;
     }
 
-    public void addDatas(List<DummyContent.DummyItem> datas) {
+    public void addDatas(List<DiscountModel.DummyItem> datas) {
         mValues.addAll(datas);
     }
 
@@ -54,32 +66,35 @@ public class DiscountItemRecyclerViewAdapter extends RecyclerView.Adapter<Recycl
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 //        if (mIsStagger) {
-            final StaggerViewHolder staggerViewHolder = (StaggerViewHolder) holder;
-            staggerViewHolder.iconView.setVisibility(View.VISIBLE);
-            staggerViewHolder.mContentView.setText(mValues.get(position).details);
-        if(position%2==0){
+        final StaggerViewHolder staggerViewHolder = (StaggerViewHolder) holder;
+        staggerViewHolder.iconView.setVisibility(View.VISIBLE);
+        staggerViewHolder.mContentView.setText(mValues.get(position).desc);
+        if (mValues.get(position).pic != null) {
+            staggerViewHolder.iconView.setImageURL(mValues.get(position).pic, false);
+//                bitmap = BitmapFactory.decodeResource(context.getResources(), staggerViewHolder.iconView.getId());
+            staggerViewHolder.iconView.setDrawingCacheEnabled(true);
+            bitmap = staggerViewHolder.iconView.getImageBitmap();
+
+
+            //((BitmapDrawable) staggerViewHolder.iconView.getDrawable()).getBitmap();
+
+        }
+       /* if(position%2==0){
             staggerViewHolder.iconView.setImageResource(R.drawable.about_logo);
         }else{
             staggerViewHolder.iconView.setImageResource(R.drawable.ic_launcher);
-        }
+        }*/
         staggerViewHolder.card_layout.setRadius(10);
 
-        Bitmap bitmap = ((BitmapDrawable)  staggerViewHolder.iconView.getDrawable()).getBitmap();
-        if(bitmap!=null){
-            Palette.generateAsync(bitmap,
-                    new Palette.PaletteAsyncListener() {
-                        @Override
-                        public void onGenerated(Palette palette) {
-                            Palette.Swatch vibrant =
-                                    palette.getVibrantSwatch();
-                            // If we have a vibrant color
-                            // update the title TextView
-                            staggerViewHolder.card_layout.setCardBackgroundColor(
-                                    vibrant.getRgb());
-                            staggerViewHolder.mContentView.setTextColor(
-                                    vibrant.getTitleTextColor());
-                        }
-                    });
+        //staggerViewHolder.iconView.getImageRes
+        //GetLocalOrNetBitmap(mValues.get(position).pic);
+       /* staggerViewHolder.iconView.setDrawingCacheEnabled(true);*/
+
+
+        if (bitmap != null) {
+            Palette palette = Palette.generate(bitmap);
+            staggerViewHolder.card_layout.setCardBackgroundColor(palette.getLightVibrantColor(context.getResources().getColor(R.color.light)));
+
         }
 
        /* } else {
@@ -90,6 +105,7 @@ public class DiscountItemRecyclerViewAdapter extends RecyclerView.Adapter<Recycl
         }*/
     }
 
+
     @Override
     public int getItemCount() {
         return mValues.size();
@@ -97,14 +113,14 @@ public class DiscountItemRecyclerViewAdapter extends RecyclerView.Adapter<Recycl
 
     public class StaggerViewHolder extends RecyclerView.ViewHolder {
         public View mView;
-        public ImageView iconView;
+        public AsyncCircleImageView iconView;
         public TextView mContentView;
         public CardView card_layout;
 
         public StaggerViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
-            iconView = (ImageView) itemView.findViewById(R.id.icon);
+            iconView = (AsyncCircleImageView) itemView.findViewById(R.id.icon);
             mContentView = (TextView) itemView.findViewById(R.id.content);
             card_layout = (CardView) itemView.findViewById(R.id.card_layout);
         }
@@ -114,7 +130,7 @@ public class DiscountItemRecyclerViewAdapter extends RecyclerView.Adapter<Recycl
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyContent.DummyItem mItem;
+        public DiscountModel.DummyItem mItem;
 
         public ViewHolder(View view) {
             super(view);
@@ -128,4 +144,6 @@ public class DiscountItemRecyclerViewAdapter extends RecyclerView.Adapter<Recycl
             return super.toString() + " '" + mContentView.getText() + "'";
         }
     }
+
+
 }

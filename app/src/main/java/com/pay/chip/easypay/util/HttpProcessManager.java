@@ -5,6 +5,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.pay.chip.easypay.pages.discount.model.DiscountModel;
+import com.pay.chip.easypay.pages.merchant.event.DiscountEvent;
 import com.pay.chip.easypay.pages.merchant.event.GoodEvent;
 import com.pay.chip.easypay.pages.merchant.event.MerchantEvent;
 import com.pay.chip.easypay.pages.merchant.model.GoodModel;
@@ -183,6 +185,43 @@ public class HttpProcessManager {
         };
         return request;
     }
+
+    public StringRequest getDicount(String url) {
+        StringRequest request = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String arg0) {
+                        String res = stripSAE(arg0);
+                        DiscountModel result = DiscountModel.getFromJson(res);
+                        DiscountEvent baseEvent = new DiscountEvent(result.getCode(),result.getMsg() ,result.getData());
+                        EventBus.getDefault().post(baseEvent);
+                        return;
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError arg0) {
+
+
+                EventBus.getDefault().post(new DiscountEvent(Constant.CODE_FAIL, null,null));
+                return;
+            }
+
+
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //传递参数
+                Map<String, String> map = new HashMap<String, String>();
+                return map;
+            }
+
+        };
+        return request;
+    }
+
+
 }
 
 

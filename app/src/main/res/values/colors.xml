@@ -17,6 +17,7 @@
     <color name="user_font_grey">#686868</color>
     <color name="version_grey">#343434</color>
     <color name="light">#FFFFFFFF</color>
+    <color name="dark">#FF000000</color>
     <color name="red">#FB5353</color>
     <color name="item_back">#80FFFFFF</color>
     <drawable name="default_bmp">#19000000</drawable>

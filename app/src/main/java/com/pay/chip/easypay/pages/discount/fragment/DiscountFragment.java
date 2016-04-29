@@ -8,10 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.toolbox.StringRequest;
 import com.pay.chip.easypay.R;
 import com.pay.chip.easypay.pages.discount.adapter.DiscountItemRecyclerViewAdapter;
-import com.pay.chip.easypay.pages.discount.model.DummyContent;
+import com.pay.chip.easypay.pages.merchant.event.DiscountEvent;
+import com.pay.chip.easypay.util.Constant;
+import com.pay.chip.easypay.util.HttpProcessManager;
 import com.pay.chip.easypay.util.LoadMoreRecyclerView;
+import com.pay.chip.easypay.util.VolleyManager;
+
+import de.greenrobot.event.EventBus;
 
 
 public class DiscountFragment extends Fragment {
@@ -33,6 +39,13 @@ public class DiscountFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -64,8 +77,8 @@ public class DiscountFragment extends Fragment {
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(false);
                 page = 0;
-                myItemRecyclerViewAdapter.setData(DummyContent.generyData(page));
-                recyclerView.setAutoLoadMoreEnable(DummyContent.hasMore(page));
+//                myItemRecyclerViewAdapter.setData();
+                recyclerView.setAutoLoadMoreEnable(false);
                 myItemRecyclerViewAdapter.notifyDataSetChanged();
             }
         });
@@ -75,7 +88,8 @@ public class DiscountFragment extends Fragment {
             recyclerView.setLayoutManager(new StaggeredGridLayoutManager(mColumnCount, StaggeredGridLayoutManager.VERTICAL));
         }*/
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-        myItemRecyclerViewAdapter = new DiscountItemRecyclerViewAdapter(DummyContent.generyData(page));
+        myItemRecyclerViewAdapter = new DiscountItemRecyclerViewAdapter(getActivity());
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(myItemRecyclerViewAdapter);
         recyclerView.setAutoLoadMoreEnable(true);
         recyclerView.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
@@ -85,18 +99,33 @@ public class DiscountFragment extends Fragment {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
-                        myItemRecyclerViewAdapter.addDatas(DummyContent.generyData(++page));
-                        recyclerView.notifyMoreFinish(DummyContent.hasMore(page));
+//                        myItemRecyclerViewAdapter.addDatas(DummyContent.generyData(++page));
+                        recyclerView.notifyMoreFinish(false);
                     }
                 }, 1000);
             }
         });
         myItemRecyclerViewAdapter.notifyDataSetChanged();
+        getDiscount();
         return view;
     }
 
 
+    public void getDiscount(){
 
+        StringRequest request =   HttpProcessManager.getInstance().getDicount(Constant.HOST_GET_DISCOUNT);
+        VolleyManager.getInstance(getActivity().getApplicationContext()).addToRequestQueue(request);
+    }
+
+    public void onEventMainThread(DiscountEvent event) {
+
+        if(event==null){
+            return;
+        }
+        myItemRecyclerViewAdapter.setData(event.data);
+
+
+    }
 
 
 }

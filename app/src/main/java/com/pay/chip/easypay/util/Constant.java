@@ -22,6 +22,7 @@ public class Constant {
 
     private static String MERCHANT_FIND = "Merchant/find";
     private static String GOODS_FIND = "Goods/find";
+    private static String GET_DISCOUNT = "Discount/find";
 
     private static String STUDENT_FIND = "Student/find";
     private static String TEACHER_FIND = "Teacher/find";
@@ -58,6 +59,7 @@ public class Constant {
     public static String HOST_MERCHANT_FIND = HOST + MERCHANT_FIND;
     public static String HOST_GOODS_FIND = HOST + GOODS_FIND;
     public static String UPLOAD_HEAD_URL = HOST+UPLOAD_HEAD;
+    public static String HOST_GET_DISCOUNT = HOST+GET_DISCOUNT;
 
     public static String HOST_STUDENT_FIND = HOST + STUDENT_FIND;
     public static String HOST_TEACHER_FIND = HOST + TEACHER_FIND;
