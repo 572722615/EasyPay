@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pay.chip.easypay.R;
+import com.pay.chip.easypay.pages.discount.activity.DiscountDetailActivity;
 import com.pay.chip.easypay.pages.discount.model.DiscountModel;
 import com.pay.chip.easypay.util.AsyncCircleImageView;
 import com.pay.chip.easypay.util.LoadMoreRecyclerView;
@@ -55,6 +56,7 @@ public class DiscountItemRecyclerViewAdapter extends RecyclerView.Adapter<Recycl
         if (viewType == LoadMoreRecyclerView.TYPE_STAGGER) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.fragment_item_staggel, parent, false);
+
             return new StaggerViewHolder(view);
         } else {
             View view = LayoutInflater.from(parent.getContext())
@@ -64,45 +66,36 @@ public class DiscountItemRecyclerViewAdapter extends RecyclerView.Adapter<Recycl
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//        if (mIsStagger) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+
         final StaggerViewHolder staggerViewHolder = (StaggerViewHolder) holder;
         staggerViewHolder.iconView.setVisibility(View.VISIBLE);
         staggerViewHolder.mContentView.setText(mValues.get(position).desc);
         if (mValues.get(position).pic != null) {
             staggerViewHolder.iconView.setImageURL(mValues.get(position).pic, false);
-//                bitmap = BitmapFactory.decodeResource(context.getResources(), staggerViewHolder.iconView.getId());
-            staggerViewHolder.iconView.setDrawingCacheEnabled(true);
+//            staggerViewHolder.iconView.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_launcher));
+//            staggerViewHolder.iconView.setDrawingCacheEnabled(true);
             bitmap = staggerViewHolder.iconView.getImageBitmap();
-
-
-            //((BitmapDrawable) staggerViewHolder.iconView.getDrawable()).getBitmap();
+//            bitmap = ((BitmapDrawable) staggerViewHolder.iconView.getDrawable()).getBitmap();
 
         }
-       /* if(position%2==0){
-            staggerViewHolder.iconView.setImageResource(R.drawable.about_logo);
-        }else{
-            staggerViewHolder.iconView.setImageResource(R.drawable.ic_launcher);
-        }*/
+
         staggerViewHolder.card_layout.setRadius(10);
 
-        //staggerViewHolder.iconView.getImageRes
-        //GetLocalOrNetBitmap(mValues.get(position).pic);
-       /* staggerViewHolder.iconView.setDrawingCacheEnabled(true);*/
+
 
 
         if (bitmap != null) {
             Palette palette = Palette.generate(bitmap);
             staggerViewHolder.card_layout.setCardBackgroundColor(palette.getLightVibrantColor(context.getResources().getColor(R.color.light)));
-
         }
+        staggerViewHolder.card_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DiscountDetailActivity.startDiscountDetailActivity(context,mValues.get(position).pic,mValues.get(position).name,mValues.get(position).address,mValues.get(position).desc);
+            }
+        });
 
-       /* } else {
-            ViewHolder mHolder = (ViewHolder) holder;
-            mHolder.mItem = mValues.get(position);
-            mHolder.mContentView.setText(mValues.get(position).content);
-            mHolder.mIdView.setText(mValues.get(position).id);
-        }*/
     }
 
 
@@ -110,6 +103,8 @@ public class DiscountItemRecyclerViewAdapter extends RecyclerView.Adapter<Recycl
     public int getItemCount() {
         return mValues.size();
     }
+
+
 
     public class StaggerViewHolder extends RecyclerView.ViewHolder {
         public View mView;

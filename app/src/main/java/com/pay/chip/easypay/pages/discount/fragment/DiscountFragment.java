@@ -80,6 +80,7 @@ public class DiscountFragment extends Fragment {
 //                myItemRecyclerViewAdapter.setData();
                 recyclerView.setAutoLoadMoreEnable(false);
                 myItemRecyclerViewAdapter.notifyDataSetChanged();
+
             }
         });
       /*  if (1 >= mColumnCount) {
@@ -99,6 +100,8 @@ public class DiscountFragment extends Fragment {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
+                        myItemRecyclerViewAdapter.notifyDataSetChanged();
+
 //                        myItemRecyclerViewAdapter.addDatas(DummyContent.generyData(++page));
                         recyclerView.notifyMoreFinish(false);
                     }

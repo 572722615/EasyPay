@@ -27,6 +27,7 @@ public class AsyncCircleImageView extends ImageView {
     private String mUrl;
     private static final byte NONE = 0;
     public Bitmap bmp;
+    Bitmap bitmap;
 
     public interface ImageDownloadListener {
         void success(Bitmap bitmap);
@@ -79,7 +80,7 @@ public class AsyncCircleImageView extends ImageView {
 
         int width = bm.getWidth();
         int height = bm.getHeight();
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(bitmap);
         canvas.drawCircle(width / 2, height / 2, width > height ? height / 2 : width / 2, paint);
@@ -230,7 +231,7 @@ public class AsyncCircleImageView extends ImageView {
     }
 
     public Bitmap getImageBitmap(){
-        return bmp;
+        return bitmap;
     }
 
 }
