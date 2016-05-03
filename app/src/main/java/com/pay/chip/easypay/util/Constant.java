@@ -19,6 +19,7 @@ public class Constant {
 
     private static String USER_LOGIN = "User/login";
     private static String USER_REGISTER = "User/register";
+    private static String CHANGE_USER_NAME = "User/changeName";
 
     private static String MERCHANT_FIND = "Merchant/find";
     private static String GOODS_FIND = "Goods/find";
@@ -60,6 +61,7 @@ public class Constant {
     public static String HOST_GOODS_FIND = HOST + GOODS_FIND;
     public static String UPLOAD_HEAD_URL = HOST+UPLOAD_HEAD;
     public static String HOST_GET_DISCOUNT = HOST+GET_DISCOUNT;
+    public static String HOST_CHANGE_USER_NAME = HOST+CHANGE_USER_NAME;
 
     public static String HOST_STUDENT_FIND = HOST + STUDENT_FIND;
     public static String HOST_TEACHER_FIND = HOST + TEACHER_FIND;

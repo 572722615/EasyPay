@@ -24,11 +24,14 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.pay.chip.easypay.R;
 import com.pay.chip.easypay.pages.person.event.ChangeInfoEvent;
+import com.pay.chip.easypay.pages.person.event.UserChangeNameEvent;
 import com.pay.chip.easypay.pages.person.model.HeadInfo;
 import com.pay.chip.easypay.pages.person.model.LoginUserInfo;
+import com.pay.chip.easypay.pages.person.view.NamePopWindow;
 import com.pay.chip.easypay.pages.person.view.UserPopWindow;
 import com.pay.chip.easypay.util.AsyncCircleImageView;
 import com.pay.chip.easypay.util.Constant;
+import com.pay.chip.easypay.util.CustomToast;
 import com.pay.chip.easypay.util.LoginDataHelper;
 import com.pay.chip.easypay.util.SelectIconHelper;
 
@@ -64,6 +67,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
 
     // 弹出窗口
     private UserPopWindow menuWindow;
+    private NamePopWindow nameWindow;
 
     private ProgressDialog mDialog ;
 
@@ -81,6 +85,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         userIconText = (AsyncCircleImageView) findViewById(R.id.user_icon_text);
         loadingProgressbar = (ProgressBar) findViewById(R.id.loadingProgressbar);
         userName = (RelativeLayout) findViewById(R.id.user_name);
+        userName.setOnClickListener(this);
         userNameIcon = (TextView) findViewById(R.id.user_name_icon);
         userNameArr = (ImageView) findViewById(R.id.user_name_arr);
         userNameText = (TextView) findViewById(R.id.user_name_text);
@@ -174,7 +179,20 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
             case R.id.user_icon_layout:
                     popWindowForIcon();
                     break;
+
+            case R.id.user_name:
+                popWindowForName();
+                break;
         }
+    }
+
+    private void popWindowForName() {
+        // 实例化SelectPicPopupWindow
+        nameWindow = new NamePopWindow(UserInfoActivity.this, (android.view.View.OnClickListener) itemsOnClick);
+        // 显示窗口
+        nameWindow.showAtLocation(
+                findViewById(R.id.user_info_layout),
+                Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); // 设置layout在PopupWindow中显示的位置
     }
 
     private void popWindowForIcon() {
@@ -182,7 +200,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         menuWindow = new UserPopWindow(UserInfoActivity.this, (android.view.View.OnClickListener) itemsOnClick);
         // 显示窗口
         menuWindow.showAtLocation(
-                        findViewById(R.id.user_info_layout),
+                findViewById(R.id.user_info_layout),
                 Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); // 设置layout在PopupWindow中显示的位置
     }
 
@@ -214,6 +232,22 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         userIconText.setImageURL(event.info.getData().toString(),false);
         LoginUserInfo data = LoginDataHelper.getInstance().getLoginUserInfo();
         data.head = event.info.getData();
+        String dataInfo = LoginUserInfo.toJsonString(data);
+        LoginDataHelper.getInstance().setLoginUserInfo(dataInfo);
+
+    }
+
+    public void onEventMainThread(UserChangeNameEvent event) {
+        if(event==null){
+            return;
+        }
+        if(event.code==0){
+            CustomToast.showToast(R.string.update_fail);
+            return;
+        }
+        userNameText.setText(event.msg);
+        LoginUserInfo data = LoginDataHelper.getInstance().getLoginUserInfo();
+        data.name = event.msg;
         String dataInfo = LoginUserInfo.toJsonString(data);
         LoginDataHelper.getInstance().setLoginUserInfo(dataInfo);
 

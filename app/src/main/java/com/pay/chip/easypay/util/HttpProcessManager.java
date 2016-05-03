@@ -11,6 +11,7 @@ import com.pay.chip.easypay.pages.merchant.event.GoodEvent;
 import com.pay.chip.easypay.pages.merchant.event.MerchantEvent;
 import com.pay.chip.easypay.pages.merchant.model.GoodModel;
 import com.pay.chip.easypay.pages.merchant.model.MerchantModel;
+import com.pay.chip.easypay.pages.person.event.UserChangeNameEvent;
 import com.pay.chip.easypay.pages.person.event.UserLoginEvent;
 import com.pay.chip.easypay.pages.person.event.UserRegisterEvent;
 import com.pay.chip.easypay.pages.person.model.BaseResult;
@@ -222,6 +223,42 @@ public class HttpProcessManager {
     }
 
 
+    public StringRequest changeName(String url,final String id ,final String name) {
+        StringRequest request = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String arg0) {
+                        String res = stripSAE(arg0);
+                        BaseResult result = BaseResult.getFromJson(res);
+                        UserChangeNameEvent baseEvent = new UserChangeNameEvent(result.getCode(),result.getInfo() );
+                        EventBus.getDefault().post(baseEvent);
+                        return;
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError arg0) {
+
+
+                EventBus.getDefault().post(new UserChangeNameEvent(Constant.CODE_FAIL, null));
+                return;
+            }
+
+
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //传递参数
+                Map<String, String> map = new HashMap<String, String>();
+                map.put(Constant.NAME,name);
+                map.put(Constant.ID,id);
+                return map;
+            }
+
+        };
+        return request;
+    }
 }
 
 

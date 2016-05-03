@@ -21,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="166dp"
         android:background="@color/white"
+        android:textColor="@color/company_grey"
         android:textColorHint="@color/company_grey"
         android:textSize="15sp"
         android:hint="@string/option_back" />
@@ -64,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
             android:background="@null"
+            android:textColor="@color/company_grey"
             android:layout_height="wrap_content" />
 
     </RelativeLayout>

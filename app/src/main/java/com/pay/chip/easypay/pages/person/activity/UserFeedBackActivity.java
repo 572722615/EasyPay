@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.pay.chip.easypay.R;
+import com.pay.chip.easypay.util.CustomToast;
 
 public class UserFeedBackActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -38,6 +39,7 @@ public class UserFeedBackActivity extends AppCompatActivity implements View.OnCl
         contact = (TextView) findViewById(R.id.contact);
         contactText = (EditText) findViewById(R.id.contact_text);
         optionSendBtn = (Button) findViewById(R.id.option_send_btn);
+        optionSendBtn.setOnClickListener(this);
     }
 
     @Override
@@ -50,7 +52,13 @@ public class UserFeedBackActivity extends AppCompatActivity implements View.OnCl
                 finish();
                 break;
 
+            case R.id.option_send_btn:
+                CustomToast.showToast(R.string.thanks_for_send);
+                finish();
+                break;
 
         }
     }
+
+
 }

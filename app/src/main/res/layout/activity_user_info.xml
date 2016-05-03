@@ -101,6 +101,8 @@
                 android:text="@string/name"
                 style="@style/user_info_l_style" />
 
+
+
             <ImageView
                 android:id="@+id/user_name_arr"
                 android:layout_width="wrap_content"
@@ -112,7 +114,9 @@
                 android:layout_toLeftOf="@id/user_name_arr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text=""
                 style="@style/user_info_r_style" />
+
 
 
         </RelativeLayout>
