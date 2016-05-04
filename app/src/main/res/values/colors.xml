@@ -20,6 +20,10 @@
     <color name="dark">#FF000000</color>
     <color name="red">#FB5353</color>
     <color name="item_back">#80FFFFFF</color>
+    <color name="personal_empty_bg">#ffececec</color>
+    <color name="merchant_linked_wifi_text">#4A4A4A</color>
+    <color name="shooping_car_item_price">#ff0000</color>
+    <color name="transparent_order">#ffffffff</color>
     <drawable name="default_bmp">#19000000</drawable>
     <drawable name="transparent_drawable">#00000000</drawable>
 </resources>

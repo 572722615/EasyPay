@@ -9,6 +9,7 @@ import com.pay.chip.easypay.pages.discount.model.DiscountModel;
 import com.pay.chip.easypay.pages.merchant.event.DiscountEvent;
 import com.pay.chip.easypay.pages.merchant.event.GoodEvent;
 import com.pay.chip.easypay.pages.merchant.event.MerchantEvent;
+import com.pay.chip.easypay.pages.merchant.event.OrderEvent;
 import com.pay.chip.easypay.pages.merchant.model.GoodModel;
 import com.pay.chip.easypay.pages.merchant.model.MerchantModel;
 import com.pay.chip.easypay.pages.person.event.UserChangeNameEvent;
@@ -253,6 +254,48 @@ public class HttpProcessManager {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put(Constant.NAME,name);
                 map.put(Constant.ID,id);
+                return map;
+            }
+
+        };
+        return request;
+    }
+
+    public StringRequest doOrder(String url,final  String userId, final String merchantId, final String seatNum, final String info,   final String totalPrice, final String remark, final String peopleNum) {
+        StringRequest request = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String arg0) {
+                        String res = stripSAE(arg0);
+                        BaseResult result = BaseResult.getFromJson(res);
+                        OrderEvent baseEvent = new OrderEvent(result.getCode(),result.getInfo() );
+                        EventBus.getDefault().post(baseEvent);
+                        return;
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError arg0) {
+
+
+                EventBus.getDefault().post(new OrderEvent(Constant.CODE_FAIL, null));
+                return;
+            }
+
+
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //传递参数
+                Map<String, String> map = new HashMap<String, String>();
+                map.put(Constant.U_ID,userId);
+                map.put(Constant.M_ID,merchantId);
+                map.put(Constant.SEAT_NUM,seatNum);
+                map.put(Constant.ORDER_INFO,info);
+                map.put(Constant.TOTAL_PRICE,totalPrice);
+                map.put(Constant.PEOPLE_NUM,peopleNum);
+                map.put(Constant.REMARK,remark);
                 return map;
             }
 

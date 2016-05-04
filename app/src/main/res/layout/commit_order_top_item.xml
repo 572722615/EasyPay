@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <TextView
+            android:id="@+id/seat_name"
+            style="@style/order_item_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/seat_name" />
+
+        <EditText
+            android:id="@+id/deskET"
+            style="@style/order_item_font"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/seat_name"
+            android:singleLine="true"
+            android:hint="@string/input_seat_num"
+            android:textCursorDrawable="@drawable/channel_cursor_color"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <TextView
+            android:id="@+id/num_name"
+            style="@style/order_item_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/person_num_name" />
+
+        <EditText
+            android:id="@+id/countET"
+            style="@style/order_item_font"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/num_name"
+            android:hint="@string/input_person_num"
+            android:inputType="number"
+            android:textCursorDrawable="@drawable/channel_cursor_color"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey_line" />
+
+    <RelativeLayout
+        android:id="@+id/remarkRL"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <TextView
+            android:id="@+id/remark_name"
+            style="@style/order_item_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remark_name" />
+
+        <EditText
+            android:id="@+id/remarkET"
+            style="@style/order_item_font"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/remark_name"
+            android:hint="@string/input_person_num"
+            android:inputType="number"
+            android:textCursorDrawable="@drawable/channel_cursor_color"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey_line" />
+
+
+</LinearLayout>

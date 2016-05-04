@@ -34,6 +34,7 @@ public class Constant {
     private static String TEACHER_LOGIN = "Teacher/login";
     private static String WORK_ANSWER = "Work_answer/findAnswer";
     private static String WORK_SUBMIT = "Work_progress/submitAnswer";
+    private static String ADD_ORDER = "Order/add";
 
     private static String TEACHER_REGISTER = "Teacher/register";
     public static final String USER = "user";
@@ -52,6 +53,13 @@ public class Constant {
     public static String NAME = "name";
     public static String PRICE = "price";
     public static String DESC = "desc";
+    public static String KEY_MERCHANT_ID = "m_id";
+    public static String SEAT_NUM = "seat_num";
+    public static String TOTAL_PRICE = "total_price";
+    public static String REMARK = "remark";
+    public static String PEOPLE_NUM = "people_num";
+    public static String ORDER_INFO = "info";
+    public static String U_ID = "u_id";
 
 
 
@@ -62,6 +70,8 @@ public class Constant {
     public static String UPLOAD_HEAD_URL = HOST+UPLOAD_HEAD;
     public static String HOST_GET_DISCOUNT = HOST+GET_DISCOUNT;
     public static String HOST_CHANGE_USER_NAME = HOST+CHANGE_USER_NAME;
+    public static String HOST_ADD_ORDER = HOST+ADD_ORDER;
+
 
     public static String HOST_STUDENT_FIND = HOST + STUDENT_FIND;
     public static String HOST_TEACHER_FIND = HOST + TEACHER_FIND;
@@ -75,4 +85,5 @@ public class Constant {
     public static String HOST_WORK_SUBMIT = HOST + WORK_SUBMIT;
     public static String HOST_TEACHER_REGISTER = HOST + TEACHER_REGISTER;
     public static String KEY_CARD_LOGIN_INFO;
+
 }

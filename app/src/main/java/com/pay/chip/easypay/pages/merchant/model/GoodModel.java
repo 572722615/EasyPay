@@ -74,6 +74,7 @@ public class GoodModel {
         private String desc;
         private String price;
         private String pic;
+        public int orderNum = 0;
 
         public void setId(String id) {
             this.id = id;

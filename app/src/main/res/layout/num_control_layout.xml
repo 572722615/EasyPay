@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="85dp"
+    android:layout_height="24dp"
+    android:padding="1dp"
+    android:id="@+id/control_layout"
+    >
+    <ImageView
+        android:id="@+id/control_subtract_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/reduce_item"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:paddingRight="8dp"
+        />
+
+    <TextView
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:id="@+id/control_num"
+        android:text="1"
+        android:textSize="13sp"
+        android:textColor="@color/merchant_linked_wifi_text"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        />
+    <ImageView
+        android:id="@+id/control_add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_item"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:paddingLeft="8dp"
+        />
+
+</RelativeLayout>

@@ -56,6 +56,13 @@
                 android:layout_centerVertical="true" />
 
 
+            <com.pay.chip.easypay.pages.merchant.view.ItemNumControl
+                android:id="@+id/item_num_control"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                />
 
         </RelativeLayout>
 

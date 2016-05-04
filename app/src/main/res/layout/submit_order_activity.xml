@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_bg">
+
+    <RelativeLayout
+        android:id="@+id/topRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <include layout="@layout/top_title" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topRL">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/editDeskNumRL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp">
+
+                <include layout="@layout/commit_order_top_item" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/orderContentRL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editDeskNumRL"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:paddingTop="15dp">
+
+                <TextView
+                    android:id="@+id/orderContentTip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15sp"
+                    android:layout_marginLeft="16sp"
+                    android:text="@string/title_order_content_tip"
+                    android:textColor="@color/user_font_grey"
+                    android:textSize="15sp" />
+                <ImageView
+                    android:id="@+id/title_line"
+                    android:layout_below="@id/orderContentTip"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:src="@color/grey_line"
+                    />
+            </RelativeLayout>
+
+
+            <com.pay.chip.easypay.util.ListViewForScrollView
+                android:id="@+id/selectedOrderLV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/orderContentRL"
+                android:divider="@null" />
+
+            <ImageView
+                android:id="@+id/lineV"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/selectedOrderLV"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:src="@color/grey_line" />
+
+            <RelativeLayout
+                android:id="@+id/bottomRL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lineV"
+                android:background="@color/grey_bg"
+                android:paddingBottom="50dp">
+
+                <TextView
+                    android:id="@+id/totalPriceTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:paddingBottom="22dp"
+                    android:paddingTop="22dp"
+                    android:text="合计：¥358"
+                    android:textColor="@color/global_bg"
+                    android:textSize="16sp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tipTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/totalPriceTV"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/title_submit_order_tip"
+                    android:textColor="@color/company_grey"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/okBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_below="@+id/tipTV"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/verify_order_selector"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="@string/title_confirm_order"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

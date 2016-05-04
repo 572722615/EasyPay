@@ -59,4 +59,22 @@
     <string name="change_name">修改姓名</string>
     <string name="sure">确定</string>
     <string name="update_fail">更新失败</string>
+    <string name="shop_car_empty">购物车是空的</string>
+    <string name="firm_list">选好了</string>
+    <string name="order">订单</string>
+    <string name="title_order_empty_tip">您还没点单</string>
+    <string name="seat_name">桌(房间)号</string>
+    <string name="input_seat_num">请输入桌号</string>
+    <string name="dialog_input_seat_num">请输入桌(房间)号</string>
+    <string name="input_person_num">请输入人数</string>
+    <string name="input_remark">口味、偏好等其他要求</string>
+    <string name="order_content">订单内容</string>
+    <string name="title_submit_order">提交订单</string>
+    <string name="title_confirm_order">确认订单</string>
+    <string name="title_order_content_tip">订单内容</string>
+    <string name="title_submit_order_tip">本次价格不代表最终结算价（不包括使用会员卡、优惠券等享受的折扣）。</string>
+    <string name="title_desk_empty_tip">请输入座号或者房间号</string>
+    <string name="right_complete">完成</string>
+    <string name="person_num_name">人数</string>
+    <string name="remark_name">备注</string>
 </resources>

@@ -11,6 +11,7 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.pay.chip.easypay.application.PayApplication;
 import com.pay.chip.easypay.pages.main.model.LocationData;
+import com.pay.chip.easypay.pages.merchant.model.ShoppingCartData;
 import com.pay.chip.easypay.pages.person.event.LoginOutEvent;
 import com.pay.chip.easypay.pages.person.model.LoginUserInfo;
 
@@ -24,7 +25,7 @@ public class LoginDataHelper {
     private LocationData locationData;
     private LoginUserInfo loginUserInfo;
     private MyLocationListener mMyLocationListener;
-
+    private ShoppingCartData shoppingCartData;
 
     private void LoginDataHelper() {
     }
@@ -71,6 +72,15 @@ public class LoginDataHelper {
         EventBus.getDefault().post(loginOutEvent);
         //清除所有与用户相关缓存
         LoginDataHelper.getInstance().clearLoginUserInfo();
+    }
+
+
+    public void setShoppingCartData(ShoppingCartData shoppingCartData) {
+        this.shoppingCartData = shoppingCartData;
+    }
+
+    public ShoppingCartData getShoppingCartData() {
+        return shoppingCartData;
     }
 
     public class MyLocationListener implements BDLocationListener {

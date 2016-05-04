@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/white"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:src="@color/grey_line"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_alignParentTop="true"
+            />
+
+        <TextView
+            android:id="@+id/menuNameTV"
+            android:gravity="left|center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_width="132dp"
+            android:layout_height="wrap_content"
+            android:text="油焖大虾"
+            android:maxLines="2"
+            android:layout_marginLeft="16dp"
+            android:textSize="15sp"
+            android:textColor="@color/company_grey_text"
+            />
+
+        <TextView
+            android:id="@+id/priceTV"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="63dp"
+            android:text="￥45"
+            android:gravity="center"
+            android:layout_marginRight="36dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="15sp"
+            android:textColor="@color/company_grey_text"
+            />
+
+        <com.pay.chip.easypay.pages.merchant.view.ItemNumControl
+            android:id="@+id/item_num_control"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>
