@@ -12,7 +12,6 @@ import com.pay.chip.easypay.R;
 import com.pay.chip.easypay.pages.merchant.event.UpdateMenuListEvent;
 import com.pay.chip.easypay.pages.merchant.model.GoodModel;
 import com.pay.chip.easypay.pages.merchant.model.ShoppingCartData;
-import com.pay.chip.easypay.pages.merchant.view.ItemNumControl;
 import com.pay.chip.easypay.util.LoginDataHelper;
 
 import java.util.ArrayList;
@@ -23,14 +22,13 @@ import de.greenrobot.event.EventBus;
  * Created by Administrator on 2015/11/30 0030.
  */
 
-public class ShoppingCarAdapter extends BaseAdapter {
-    boolean flag = true;
+public class ConfirmCarAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<GoodModel.DataEntity> dataList;
     private int totalMoney = 0;
     private int totalCount = 0;
 
-    public ShoppingCarAdapter(Context context) {
+    public ConfirmCarAdapter(Context context) {
         this.context = context;
         dataList = new ArrayList<>();
     }
@@ -64,25 +62,18 @@ public class ShoppingCarAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.shopping_item, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.confirm_item, null);
             viewHolder.menuNameTV = (TextView) convertView.findViewById(R.id.menuNameTV);
             viewHolder.priceTV = (TextView) convertView.findViewById(R.id.priceTV);
-            viewHolder.item_num_text = (TextView) convertView.findViewById(R.id.item_num_text);
-            viewHolder.item_num_control = (ItemNumControl) convertView.findViewById(R.id.item_num_control);
-            if(!flag){
-                viewHolder.item_num_control.setVisibility(View.GONE);
-                viewHolder.item_num_text.setVisibility(View.VISIBLE);
-            }
+            viewHolder.item_num_control = (TextView) convertView.findViewById(R.id.item_num_control);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.menuNameTV.setText(getMenuName(itemData));
         viewHolder.priceTV.setText("¥" + itemData.getPrice());
-        viewHolder.item_num_control.setControlNum(itemData.orderNum);
-        viewHolder.item_num_text.setText(itemData.orderNum+"份");
-
-        viewHolder.item_num_control.setItemNumControlButtonClicked(new ItemNumControl.OnItemNumControlButtonClickedListener() {
+        viewHolder.item_num_control.setText(itemData.orderNum);
+        /*viewHolder.item_num_control.setItemNumControlButtonClicked(new ItemNumControl.OnItemNumControlButtonClickedListener() {
             @Override
             public void onItemNumControlButtonClicked(boolean isAdd, int num) {
                 int price = 0;
@@ -110,7 +101,7 @@ public class ShoppingCarAdapter extends BaseAdapter {
                 }
                 updateSelectedData(itemData);
             }
-        });
+        });*/
         return convertView;
     }
 
@@ -132,14 +123,9 @@ public class ShoppingCarAdapter extends BaseAdapter {
         return menuName;
     }
 
-    public static class ViewHolder {
+    private static class ViewHolder {
         TextView menuNameTV;
         TextView priceTV;
-        ItemNumControl item_num_control;
-        TextView item_num_text;
-    }
-
-    public void hideControl(){
-            flag = false;
+        TextView item_num_control;
     }
 }

@@ -40,7 +40,7 @@ public class HttpProcessManager {
     }
 
 
-    public StringRequest loginStudent(String url, final String user_telno, final String user_pass) {
+    public StringRequest loginUser(String url, final String user_telno, final String user_pass) {
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
 
@@ -52,7 +52,8 @@ public class HttpProcessManager {
                         EventBus.getDefault().post(baseEvent);
                         return;
                     }
-                }, new Response.ErrorListener() {
+                }
+                , new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError arg0) {

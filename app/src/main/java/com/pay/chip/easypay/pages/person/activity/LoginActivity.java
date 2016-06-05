@@ -78,7 +78,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             return;
         }
 
-        StringRequest request = HttpProcessManager.getInstance().loginStudent(Constant.HOST_USER_LOGIN, telno, pass);
+        StringRequest request = HttpProcessManager.getInstance().loginUser(Constant.HOST_USER_LOGIN, telno, pass);
         VolleyManager.getInstance(getApplicationContext()).addToRequestQueue(request);
 
     }

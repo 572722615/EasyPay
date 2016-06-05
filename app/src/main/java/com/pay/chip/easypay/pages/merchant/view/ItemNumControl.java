@@ -127,4 +127,9 @@ public class ItemNumControl extends RelativeLayout implements View.OnClickListen
     public interface OnItemNumControlButtonClickedListener {
         void onItemNumControlButtonClicked(boolean isAdd, int num);
     }
+
+    public void hideControl(){
+        control_add_btn.setVisibility(GONE);
+        control_subtract_btn.setVisibility(GONE);
+    }
 }

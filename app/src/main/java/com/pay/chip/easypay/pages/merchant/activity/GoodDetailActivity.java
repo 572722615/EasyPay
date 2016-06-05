@@ -91,7 +91,18 @@ public class GoodDetailActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onResume() {
         super.onResume();
-        Bitmap bitmap = ((BitmapDrawable) goodPic.getDrawable()).getBitmap();
+        Bitmap bitmap = null;
+        try {
+            if (null == goodPic || null == goodPic.getDrawable() || null == ((BitmapDrawable) goodPic.getDrawable()).getBitmap()) {
+                return;
+            }
+            bitmap = ((BitmapDrawable) goodPic.getDrawable()).getBitmap();
+        }catch (Exception e){
+
+        }
+        if(null==bitmap){
+            return;
+        }
 
         Palette palette = Palette.generate(bitmap);
             detail_layout.setBackgroundColor(palette.getLightVibrantColor(getResources().getColor(R.color.light)));

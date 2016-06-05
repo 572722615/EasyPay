@@ -95,9 +95,10 @@ public class SubmitOrderActivity extends Activity implements View.OnClickListene
             return;
         }
         totalPriceTV.setText("合计：¥" + shoppingCartData.totalMoney);
-        totalPriceTV.setText(shoppingCartData.totalMoney + "");
+//        totalPriceTV.setText(shoppingCartData.totalMoney + "");
         selectedAdapter.setData(shoppingCartData.data, shoppingCartData.totalCount, shoppingCartData.totalMoney);
         ViewUtil.setListViewHeightBasedOnChildren(selectedOrderLV);
+        selectedAdapter.hideControl();
         userId = LoginDataHelper.getInstance().getLoginUserInfo().id;
     }
 

@@ -230,6 +230,12 @@ public class GoodListActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             case R.id.okBtn:
+
+                if(!LoginDataHelper.getInstance().isLogin()){
+                    CustomToast.showLongToast(getString(R.string.no_login));
+                    break;
+                }
+
                 ShoppingCartData shoppingCartData = LoginDataHelper.getInstance().getShoppingCartData();
                 if (shoppingCartData == null || shoppingCartData.data == null || shoppingCartData.data.isEmpty()) {
                     CustomToast.showToast(getString(R.string.title_order_empty_tip));

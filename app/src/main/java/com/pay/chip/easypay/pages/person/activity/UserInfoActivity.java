@@ -170,6 +170,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         switch (id) {
             case R.id.login_out:
                 LoginDataHelper.getInstance().doLogout(UserInfoActivity.this);
+                finish();
                 break;
 
             case R.id.leftFL:

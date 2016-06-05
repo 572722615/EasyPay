@@ -77,4 +77,5 @@
     <string name="right_complete">完成</string>
     <string name="person_num_name">人数</string>
     <string name="remark_name">备注</string>
+    <string name="no_login">您还没登录</string>
 </resources>
