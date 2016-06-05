@@ -9,7 +9,7 @@ import com.pay.chip.easypay.R;
 
 
 public final class SplashActivity extends Activity {
-    private static final long DELAY_TIME = 100L;
+    private static final long DELAY_TIME = 1500L;
     private Handler mHandler = new Handler();
 
     @Override

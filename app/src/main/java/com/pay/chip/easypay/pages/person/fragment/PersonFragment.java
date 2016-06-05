@@ -126,11 +126,11 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         isLogin = LoginDataHelper.getInstance().isLogin();
-        if(isLogin){
+        if (isLogin) {
             loginUserInfo = LoginDataHelper.getInstance().getLoginUserInfo();
             userCenterName.setText(loginUserInfo.telno);
-            if(loginUserInfo.head!=null){
-                userCenterIcon.setImageURL(loginUserInfo.head,false);
+            if (loginUserInfo.head != null) {
+                userCenterIcon.setImageURL(loginUserInfo.head, false);
             }
         }
         userCenterIcon.setDrawingCacheEnabled(true);
@@ -141,6 +141,9 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
                     public void onGenerated(Palette palette) {
                         Palette.Swatch vibrant =
                                 palette.getVibrantSwatch();
+                        if (vibrant == null) {
+                            return;
+                        }
                         userLoginLayout.setBackgroundColor(
                                 vibrant.getRgb());
                         userCenterName.setTextColor(
@@ -155,11 +158,13 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
         mRootView = inflater.inflate(R.layout.personal_main_fragment, container, false);
         initView();
         isLogin = LoginDataHelper.getInstance().isLogin();
-        if(isLogin){
+        if (isLogin) {
             loginUserInfo = LoginDataHelper.getInstance().getLoginUserInfo();
             userCenterName.setText(loginUserInfo.telno);
-            if(loginUserInfo.head!=null){
-                userCenterIcon.setImageURL(loginUserInfo.head,false);
+
+
+            if (loginUserInfo.head != null) {
+                userCenterIcon.setImageURL(loginUserInfo.head, false);
                 userCenterIcon.setDrawingCacheEnabled(true);
                 bitmap = ((BitmapDrawable) userCenterIcon.getDrawable()).getBitmap();
                 Palette.generateAsync(bitmap,
@@ -168,6 +173,9 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
                             public void onGenerated(Palette palette) {
                                 Palette.Swatch vibrant =
                                         palette.getVibrantSwatch();
+                                if (vibrant == null) {
+                                    return;
+                                }
                                 userLoginLayout.setBackgroundColor(
                                         vibrant.getRgb());
                                 userCenterName.setTextColor(
@@ -184,7 +192,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        switch (id){
+        switch (id) {
             case R.id.user_about:
                 startActivity(new Intent(getActivity(), AboutUsAcitivity.class));
                 break;
@@ -208,10 +216,10 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
                 } else {
                     startActivityByFlag(getActivity(), EBConstant.UserFlag.USER_LOGIN.toString());
                 }*/
-                if(isLogin){
+                if (isLogin) {
                     String loginInfo = LoginUserInfo.toJsonString(loginUserInfo);
-                    UserInfoActivity.startUserInfoActivity(getActivity(),loginInfo);
-                }else{
+                    UserInfoActivity.startUserInfoActivity(getActivity(), loginInfo);
+                } else {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
                 break;

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -254,44 +255,6 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (resultCode != RESULT_CANCELED) {
-            switch (requestCode) {
-                case SelectIconHelper.SELECT_PIC_CODE:
-                    if (data != null) {
-                        headUri = data.getData();
-                        if(headUri!=null){
-                            try
-                            {
-                                uploadImg(headUri);
-                            }catch (Exception  e){
-
-                            }
-                        }
-                    }
-                    break;
-                case SelectIconHelper.SELECT_CAMERA_CODE:
-
-                    headUri = data.getData();
-                    if(headUri!=null){
-                        try
-                        {
-                            uploadImg(headUri);
-                        }catch (Exception  e){
-
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
-
-
-        }
-
     public void uploadImg(Uri bitmap) throws Exception {
         mDialog.setMessage("图片上传中...");
         mDialog.show();
@@ -314,6 +277,57 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
 
         postFile(file);
 
+
+
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode != RESULT_CANCELED) {
+            switch (requestCode) {
+                case SelectIconHelper.SELECT_PIC_CODE:
+                    if (data != null) {
+                        headUri = data.getData();
+                        if(headUri!=null){
+                            try
+                            {
+                                uploadImg(headUri);
+                            }catch (Exception  e){
+
+                            }
+                        }
+                    }
+                    break;
+                case SelectIconHelper.SELECT_CAMERA_CODE:
+                    Bundle bundle = data.getExtras();
+                    Bitmap bitmap = (Bitmap) bundle.get("data");
+                    if (data != null) {
+                        headUri = data.getData();
+                        if(headUri!=null){
+                            try
+                            {
+                                uploadImg(headUri);
+                            }catch (Exception  e){
+
+                            }
+                        }else{
+                            try {
+                                uploadImg(Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null)));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                      //  CustomToast.showLongToast(headUri.toString());
+
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
 
 
 

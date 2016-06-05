@@ -76,7 +76,8 @@ public class SelectIconHelper {
 
     public void showCameraDialog(Activity activity) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, getCameraTempUri());
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, getCameraTempUri());
+
         activity.startActivityForResult(intent, SELECT_CAMERA_CODE);
     }
 
